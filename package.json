@@ -1,0 +1,35 @@
+{
+  "name": "cmms",
+  "version": "1.0.0",
+  "description": "Computerized Medical Equipment Maintenance System",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "keywords": [
+    "biomedical",
+    "health",
+    "equipment",
+    "medical",
+    "computer",
+    "automation",
+    "system",
+    "maintenance",
+    "engineer",
+    "doctor",
+    "admin"
+  ],
+  "author": "Nwokorie Francis Obinna",
+  "license": "MIT",
+  "dependencies": {
+    "bcrypt-nodejs": "0.0.3",
+    "body-parser": "^1.18.3",
+    "client-sessions": "^0.8.0",
+    "cloudinary": "^1.11.0",
+    "connect-multiparty": "^2.1.0",
+    "express": "^4.16.3",
+    "express-handlebars": "^3.0.0",
+    "mongoose": "^5.1.3"
+  }
+}

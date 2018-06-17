@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="shortcut icon" href="/img/favicon.png" type="image/x-icon" />
+    <title>Computerized Medical Equipment Maintenance System </title>
+    <link href="/dist/css/style.min.css" rel="stylesheet">
+</head>
+
+<body style="background-color:rgb(230, 236, 243);">
+    <!-- ============================================================== -->
+    <!-- Main wrapper - style you can find in pages.scss -->
+    <!-- ============================================================== -->
+    <div id="main-wrapper">
+        <!-- ============================================================== -->
+        <!-- Topbar header - style you can find in pages.scss -->
+        <!-- ============================================================== -->
+        <header class="topbar" data-navbarbg="skin5">
+            <nav class="navbar top-navbar navbar-expand-md navbar-dark">
+                <div class="navbar-header" data-logobg="skin5">
+                    <a class="navbar-brand" href="/chat/chat-operator/{{operator_username}}">
+                        <!-- Logo icon -->
+                        <b class="logo-icon p-l-10">
+                            <!--You can put here icon as well // <i class="wi wi-sunset"></i> //-->
+                            <!-- Dark Logo icon -->
+                            <img src="/img/favicon.png" alt="homepage" class="light-logo" />
+                           
+                        </b>
+                        <!--End Logo icon -->
+                         <!-- Logo text -->
+                        <span class="logo-text" style="margin-top:8px;">
+                             <!-- dark Logo text -->
+                             {{!-- <img src="/assets/images/logo-text.png" alt="homepage" class="light-logo" /> --}}
+                             <h3>CMMS - Operator</h3>
+                            
+                        </span>
+                    </a>
+                </div>
+                <!-- ============================================================== -->
+                <!-- End Logo -->
+                <!-- ============================================================== -->
+                <div class="navbar-collapse collapse" id="navbarSupportedContent" data-navbarbg="skin5">
+                    <!-- ============================================================== -->
+                    <!-- toggle and nav items -->
+                    <ul class="navbar-nav float-left mr-auto">
+                        <li class="nav-item dropdown">
+                        </li>
+                        <li class="nav-item search-box"> 
+                        </li>
+                    </ul>
+
+                    <ul class="navbar-nav float-right">
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle text-muted waves-effect waves-dark pro-pic" href="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img src="../../assets/images/users/1.jpg" alt="user" class="rounded-circle" width="31"></a>
+                            <div class="dropdown-menu dropdown-menu-right user-dd animated">
+                                <a class="dropdown-item" href="/hr/operator-profile"><i class="ti-user m-r-5 m-l-5"></i> My Profile</a>
+                                <div class="dropdown-divider"></div>
+                                <a class="dropdown-item" href="/hr/operator-logout"><i class="fa fa-power-off m-r-5 m-l-5"></i> Logout</a>
+                            </div>
+                        </li>
+                        <!-- ============================================================== -->
+                        <!-- User profile and search -->
+                        <!-- ============================================================== -->
+                    </ul>
+                </div>
+            </nav>
+        </header>
+        <!-- ============================================================== -->
+        <!-- End Topbar header -->
+        <div class="container" style="slategray; margin-top: 10px;">
+                <!-- ============================================================== -->
+                <!-- Start Page Content -->
+                <!-- ============================================================== -->
+                <div class="row">
+                    <div class="col-12">
+                        <div class="card">
+                            <h2 class="card-title text-center" style="margin-top:10px;">{{name}}</h2>
+                            <div class="card-body">
+                                <div class="chat-box scrollable" style="height:475px;">
+                                    <!--chat Row -->
+                                    <ul class="chat-list">
+                                        {{#each messages_other}}
+                                            <!--chat Row -->
+                                            <li class="chat-item">
+                                                <div class="chat-img"><img src="/assets/images/users/4.jpg" alt="user"></div>
+                                                <div class="chat-content">
+                                                    <h6 class="font-medium">{{from}}</h6>
+                                                    <div class="box bg-light-info">{{message}}</div>
+                                                </div>
+                                                <div class="chat-time">{{chat_date}}</div>
+                                            </li>
+                                        {{/each}}
+                                        <!--cmRequest -->
+                                        {{#each requests}}
+                                            <!--chat Row -->
+                                            <li class="chat-item">
+                                                <div class="chat-content">
+                                                    <div class="box bg-light-info" style="float:right; margin-right:-45px;">
+                                                    <h6 class="font-medium" style="font-style:italic;">CM Request</h6> <br>
+                                                        <p><strong>Equipment: </strong> {{equipt}}</p>
+                                                        <p><strong>Location: </strong>       {{department}} <strong>at:</strong> {{location}}</p>
+                                                        <p><strong>Statement: </strong>      {{statement}}</p>
+                                                        <p><strong>Date Failed: </strong>    {{fail_date}}</p>
+                                                    </div>
+                                                </div>
+                                                <div class="chat-time" style="float:right; margin-right:25px;">{{time}}</div>
+                                            </li>
+                                        {{/each}}
+                                        <!--chat Row -->
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="accordion" id="accordionExample">
+                                <div class="card m-b-0 border-top">
+                                    <div class="card-header" id="headingTwo">
+                                    <h6 class="mb-0">
+                                        <a class="collapsed" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
+                                            <i class="fas fa-paper-plane" aria-hidden="true"></i>
+                                            <span>CM Request</span>
+                                        </a>
+                                    </h6>
+                                    </div>
+                                    <div id="collapseTwo" class="collapse show" aria-labelledby="headingTwo" data-parent="#accordionExample">
+                                        <div class="card-body">
+                                            <form method="POST" action="/operator_r" id="cm_request">
+                                                <div class="row mb-3">
+                                                    <div class="col-lg-4">
+                                                        <select name="equipt" id="equipt" class="form-control">
+                                                            <option>Select Equipment</option>
+                                                            {{#each equipments}}
+                                                                <option value="{{name}}">{{name}} - {{inv_id}}</option>
+                                                            {{/each}}
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                                <div class="row mb-3">
+                                                    <div class="col-lg-4">
+                                                        <select name="department" id="department" class="form-control">
+                                                            <option>Select Department</option>
+                                                            {{#each departments}}
+                                                                <option value="{{name}}">{{name}}</option>
+                                                            {{/each}}
+                                                        </select>
+                                                    </div>
+                                                    <div class="col-lg-4">
+                                                        <input type="text" class="form-control" placeholder="Specific Location" name="location" id="location">
+                                                    </div>
+                                                </div>
+                                                <div class="row mb-3">
+                                                    <div class="col-lg-4">
+                                                        <label for="fail_date">Date failed: </label>
+                                                        <input type="date" class="form-control" placeholder="Fail date" name="fail_date" id="fail_date">
+                                                    </div>
+                                                </div>
+                                                <div class="row mb-3">
+                                                    <div class="col-lg-8">
+                                                        <textarea name="statement" id="statement" cols="30" rows="2" class="form-control" placeholder="Enter statement"></textarea>
+                                                    </div>
+                                                    <div class="col-lg-4">
+                                                        <a class="btn-circle btn-lg btn-cyan float-right text-white" onclick="document.getElementById('cm_request').submit(); return false;"><i class="fas fa-paper-plane"></i></a>
+                                                    </div>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                            </div>
+                            
+                        </div>
+                    </div>
+                </div>
+                <!-- ============================================================== -->
+                <!-- End PAge Content -->
+                <!-- ============================================================== -->
+                <!-- ============================================================== -->
+                <!-- Right sidebar -->
+                <!-- ============================================================== -->
+                <!-- .right-sidebar -->
+                <!-- ============================================================== -->
+                <!-- End Right sidebar -->
+                <!-- ============================================================== -->
+            </div>
+            <!-- ============================================================== -->
+            <!-- End Container fluid  -->
+            <!-- ============================================================== -->
+            <!-- ============================================================== -->
+            <!-- footer -->
+            <!-- ============================================================== -->
+            <footer class="footer text-center">
+                All Rights Reserved by CMMS. Designed and Developed by <a href="https://linkedin.com/in/chrisantuseze">Chrisantus Eze</a>.
+            </footer>
+            <!-- ============================================================== -->
+            <!-- End footer -->
+            <!-- ============================================================== -->
+        <!-- ============================================================== -->
+        <!-- End Page wrapper  -->
+        <!-- ============================================================== -->
+    </div>
+    <!-- ============================================================== -->
+    <!-- End Wrapper -->
+    <!-- ============================================================== -->
+    <!-- ============================================================== -->
+    <!-- All Jquery -->
+    <!-- ============================================================== -->
+    <script src="../../assets/libs/jquery/dist/jquery.min.js"></script>
+    <!-- Bootstrap tether Core JavaScript -->
+    <script src="../../assets/libs/popper.js/dist/umd/popper.min.js"></script>
+    <script src="../../assets/libs/bootstrap/dist/js/bootstrap.min.js"></script>
+    <!-- slimscrollbar scrollbar JavaScript -->
+    <script src="../../assets/libs/perfect-scrollbar/dist/perfect-scrollbar.jquery.min.js"></script>
+    <script src="../../assets/extra-libs/sparkline/sparkline.js"></script>
+    <!--Wave Effects -->
+    <script src="../../dist/js/waves.js"></script>
+    <!--Menu sidebar -->
+    <script src="../../dist/js/sidebarmenu.js"></script>
+    <!--Custom JavaScript -->
+    <script src="../../dist/js/custom.min.js"></script>
+</body>
+
+</html>

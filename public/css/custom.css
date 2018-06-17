@@ -1,0 +1,368 @@
+/* Add here all your CSS customizations */
+
+
+
+/* header */
+html #header .header-top.header-top-tertiary a {
+	color: #B8C0CF !important;
+	font-weight:bold;
+	padding-left:20px;
+}
+
+html #header .header-top.header-top-tertiary p {
+	color: #B8C0CF !important;
+}
+
+html #header .header-top.header-top-tertiary a:hover,
+html #header .header-top.header-top-tertiary a:focus {
+	color: #2AAFEA !important;
+	text-decoration:none !important;
+}
+
+#header .header-logo img {
+	position: relative;
+	margin: 0px 0px 0px 0 !important;
+}
+
+#header .header-manual-logo {
+	float:left; 
+	width:150px;
+	padding-top:3px;
+}
+
+a .header-manual-logo .top-line {
+	color:#323233;
+	font-size:30px;
+	font-weight:bold;
+	padding-bottom:10px;
+}
+
+a .header-manual-logo .bottom-container {
+	width:139px;
+	height:22px;
+	background-color:#2AAFEA;
+	padding-left:2px;
+	padding-top:0px;
+	margin-top:0px;
+}
+
+a .header-manual-logo .bottom-line {
+	color:#ffffff;
+	font-size:14px;
+	font-weight:bold;
+	letter-spacing:11px;
+	padding-left:4px;
+	padding-top:0px;
+	padding-bottom:0px;
+	margin-top:0px;
+}
+
+/* slider */
+
+.slider-container .main-label {
+	color: #FFF;
+	font-size: 62px;
+	line-height: 69px;
+	font-weight: 800;
+	text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.15);
+}
+
+/*.slider-container.light .featured-label, 
+.slider-container.light .top-label, */
+.slider-container.light .main-label
+/*.slider-container.light .bottom-label*/ 
+{
+	font-size: 54px;
+    color: #FFF;
+	font-weight: normal;
+}
+
+.slider-container.light .bottom-label
+{
+	font-size: 27px;
+    color: #FFF;
+	font-weight: normal;
+}
+
+.slider-container.light .top-label > a
+{
+	font-size: 28px;
+    color: #FFF;
+	font-weight: normal;
+	padding-left: 50px;
+	padding-right: 50px;
+}
+
+.featured-boxes-full .featured-box-full  > a.btn.btn-secondary.btn-lg {
+	 padding:8px;
+}
+
+.featured-boxes-full .featured-box-full .fa {
+    font-size: 90px;
+}
+
+@media (max-width: 1080px) {
+	/* header */
+	html #header .header-top.header-top-tertiary a {
+		padding-left:7px !important;
+	}
+}
+
+@media (max-width: 691px) {
+	.slider-container.light .top-label > a	{
+		font-size: 20px;
+		padding-left: 20px;
+		padding-right: 20px;
+	}
+}
+
+@media (max-width: 479px) {
+	/* header */
+	html #header .header-top.header-top-tertiary a {
+		padding-left:5px !important;
+	}
+
+	.slider-container.light .top-label > a	{
+		font-size: 14px;
+		padding: 5px;
+	}
+}
+
+.customer-logo-carousel {
+    padding-top:40px;
+    background-color:#F8F9F9;
+}
+
+/* testimonial */
+.testimonial .testimonial-author img {
+	/*width:100px;
+	height:100px;*/
+	max-width:120px;
+}
+
+.text-followed-by-vertical-divider h4{
+    color:#2AAFEA;
+    text-align:right;
+    border-right-style:solid;
+    border-right-width:1px;
+    border-right-color:#cccccc;
+    padding-right:40px;
+}
+
+.text-followed-by-vertical-divider p{
+    font-size:17px;
+    color:#666666;
+    }
+
+@media (max-width: 1080px) {
+	.text-followed-by-vertical-divider h4{
+    color:#2AAFEA;
+    text-align:center;
+    border-right-style:none;
+    padding-right:0px;
+    }
+
+    .text-followed-by-vertical-divider p{
+    text-align:center;
+    }
+}
+
+.home-intro {
+    margin-bottom: 0px;
+}
+
+.vertikal-feature-row-image {
+       text-align:center;
+       color:#2AAFEA;
+    }
+
+.vertikal-feature-row-image i{
+       font-size:180px;
+    }
+
+@media (max-width: 991px) {
+    .vertikal-feature-row-image {
+       margin-bottom:30px;
+    }
+
+    .vertikal-feature-row-image i{
+       font-size:120px;
+    }
+
+     .vertikal-feature-row-text {       
+       text-align:center;
+    }
+}
+
+.vertikal-large-screenshot {
+       margin: 45px 0px -30px;
+    }
+
+
+.vertikal-testimonial-page-header {
+       background-color:#F4F4F4;
+    }
+
+.vertikal-testimonial-bubble {
+       background-color:#F4F4F4;
+       padding:17px;
+    }
+
+.vertikal-testimonial-bubble p{
+       text-align:left;
+    }
+
+
+.vertikal-testimonial-author span{
+       line-height:1.3;
+    }
+
+.feature-box .feature-box-info .feature-box-info-custom1 {
+    font-size:18px;
+}
+
+.thumb-info-side-image-wrapper{
+    background-color:#eeeeee;
+}
+
+#footer {
+    padding: 40px 0 0;
+    margin-top:0px;
+}
+
+#footer h5 {
+    margin: 0 0 4px 0;
+    color:#2AAFEA;
+}
+
+#footer a{
+    color:#bbb;
+    margin: 0;
+    padding: 0;
+}
+
+.newsletter{    
+    padding-bottom: 40px;
+}
+
+.pricing-table .plan {
+    padding:0px;
+}
+
+.pricing-table h3 {
+   /* text-shadow:none !important;*/
+}
+
+.pricing-table h3 .desc2 {
+    font-size: 0.7em;
+    margin-top:10px;
+    margin-bottom:10px;
+    color:#dddddd;
+    font-style: normal;
+    text-transform: none;
+    display: block;
+}
+
+.pricing-table h3 .desc3 {
+    color:#dddddd !important;
+}
+
+.pricing-table h3 .desc4 {
+    font-size: 0.6em;
+}
+
+.pricing-table h3 .no-shadow {
+    text-shadow:none;
+}
+
+.pricing-table .most-popular2 {
+	border-color: #2aafea;
+}
+
+.pricing-table .most-popular2 h3 {
+	background-color: #383F48 !important;
+}
+
+.pricing-table .most-popular2 h3 span {
+	background-color: #383F48 !important;
+}
+
+.pricing-table .most-popular3 {
+	border-color: #2AAFEA;
+}
+
+.pricing-table .most-popular3 h3 {
+	background-color: #2AAFEA !important;
+}
+
+.pricing-table .most-popular3 h3 span {
+	background-color: #2AAFEA !important;
+}
+
+.compare-products th{
+    font-size:17px;
+    color:#484848;
+}
+
+.compare-products .compare-products-table-header th{
+    background-color:#ffffff;
+    color:#ffffff;
+}
+
+.compare-products th{
+    font-size:15px;
+}
+
+.compare-products td{
+    font-size:14px;
+    color:#484848;
+    padding-top:2px !important;
+    padding-bottom:2px !important;
+    vertical-align: middle !important;
+}
+
+.compare-products .value-cell {
+    background-color:#eeeeee;
+    border-right-style:solid;border-right-width:8px; border-right-color:white;
+    }
+
+.compare-products .value-cell a {
+    color:#0088CC;
+    text-decoration:underline;
+    }
+
+.compare-products .value-cell .btn {
+    color:white;
+    text-decoration:none;
+    font-weight:bold;
+    }
+
+.compare-products .row{
+    padding:0px;
+    margin:0px
+}
+
+.compare-products .fa{
+    color:#4BAE50;
+    font-size:28px;
+}
+
+/* FAQ section */
+.panel-group .panel-heading a {
+    color: #0088CC;
+}
+
+.black-text-in-button {
+    color:#333333;
+    font-weight:bold;
+}
+
+
+.spacer40 {
+    margin-top: 40px; 
+}
+
+.spacer80 {
+    margin-top: 80px; 
+}
+
