@@ -5,6 +5,7 @@ const engineerModel     = require('./model/engineerSchema');
 const operatorModel     = require('./model/operatorSchema');
 const departmentModel   = require('./model/departmentSchema');
 const equipmentModel    = require('./model/equiptSchema');
+const notifModel        = require('./model/notificationSchema');
 
 module.exports = {
     chat: (req, res) =>{
@@ -77,33 +78,78 @@ module.exports = {
         let username         = req.engineersession.user.username;  //To be replaced with session data
         let name             = req.engineersession.user.name;
 
-        chatModel.find({to: username}, (err, chats) =>{
+        let date       = new Date();
+        let day        = date.getDate();
+        let month      = date.getMonth() + 1;  
+        let num        = 0;
+        let notifs     = [];
+        let tomorrow   = null;
+        let today      = null;
+        let yesterday  = null;
+        notifModel.find({due_month: month}, (err, notifications) =>{
             if(err) throw err;
             else{
-                chatMessagesTo = chats;
-                workOrderModel.find({engineer_username: username}, (err, wos) =>{
+                notifications.forEach((notification, index) =>{
+                    if((notification.due_day == (day-1)) || (notification.due_day == day) || (notification.due_day == (day + 1)) || (notification.due_day == (day + 2))){
+                        
+                        if(notification.due_day == (day)){
+                            notification.today = "Today";
+                            notification.tomorrow = "";
+                            notification.yesterday = "";
+                            notifs[index] = notification;
+                            num += 1;
+                        }else if(notification.due_day == (day + 1)){
+                            notification.tomorrow = "Tomorrow";
+                            notification.today = "";
+                            notification.yesterday = "";
+                            notifs[index] = notification;
+                            num += 1;
+                        }else if(notification.due_day == (day - 1)){
+                            notification.tomorrow = "";
+                            notification.today = "";
+                            notification.yesterday = "Yesterday";
+                            notifs[index] = notification;
+                            num += 1;
+                        }else{
+                            notification.tomorrow = "";
+                            notification.today = "";
+                            notification.yesterday = "";
+                            notifs[index] = notification;
+                            num += 1;
+                        }
+                    }
+                });
+                
+                chatModel.find({to: username}, (err, chats) =>{
                     if(err) throw err;
                     else{
-                        workOrders = wos;
-                        chatModel.find({from: username}, (err, chatss) =>{
+                        chatMessagesTo = chats;
+                        workOrderModel.find({engineer_username: username}, (err, wos) =>{
                             if(err) throw err;
                             else{
-                                chatMessagesFrom = chatss;
-                                res.render('hr/engineerIndex', 
-                                        {
-                                            name: name, 
-                                            messages_other: chatMessagesTo, 
-                                            messages_me: chatMessagesFrom, 
-                                            workOrders: workOrders
-                                        });                                
+                                workOrders = wos;
+                                chatModel.find({from: username}, (err, chatss) =>{
+                                    if(err) throw err;
+                                    else{
+                                        chatMessagesFrom = chatss;
+                                        res.render('hr/engineerIndex', 
+                                                {
+                                                    name: name, 
+                                                    messages_other: chatMessagesTo, 
+                                                    messages_me: chatMessagesFrom, 
+                                                    workOrders: workOrders,
+                                                    notifications: notifs, 
+                                                    num: num
+                                                });                                
+                                    }
+                                });
+                            
                             }
                         });
-                    
                     }
                 });
             }
         });
-       
         
     },
     chatOperator: (req, res) =>{

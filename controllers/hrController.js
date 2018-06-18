@@ -382,31 +382,47 @@ module.exports = {
 
     admin: (req, res) =>{
         let date       = new Date();
-        let day        = date.getDay();
-        let month      = date.getMonth();  
-
-        notifModel.find().sort({due_date: 1}).exec((err, notifications) =>{
+        let day        = date.getDate();
+        let month      = date.getMonth() + 1;  
+        let num        = 0;
+        let notifs     = [];
+        let tomorrow   = null;
+        let today      = null;
+        let yesterday  = null;
+        notifModel.find({due_month: month}, (err, notifications) =>{
             if(err) throw err;
             else{
-                let notification = null;
-                let num = 0;
-                notifications.forEach((index, notif) =>{
-                    if(month == notif.due_month){
-                        if(day == notif.due_day){
-                            notification[index] = notif;
-                            num = num + 1;
-                        }else if((day-1) == notif.due_day){
-                            notification[index] = notif;
-                            num = num + 1;
-                        }else if((day-2) == notif.due_day){
-                            notification[index] = notif;
-                            num = num + 1;
+                notifications.forEach((notification, index) =>{
+                    if((notification.due_day == (day-1)) || (notification.due_day == day) || (notification.due_day == (day + 1)) || (notification.due_day == (day + 2))){
+                        
+                        if(notification.due_day == (day)){
+                            notification.today = "Today";
+                            notification.tomorrow = "";
+                            notification.yesterday = "";
+                            notifs[index] = notification;
+                            num += 1;
+                        }else if(notification.due_day == (day + 1)){
+                            notification.tomorrow = "Tomorrow";
+                            notification.today = "";
+                            notification.yesterday = "";
+                            notifs[index] = notification;
+                            num += 1;
+                        }else if(notification.due_day == (day - 1)){
+                            notification.tomorrow = "";
+                            notification.today = "";
+                            notification.yesterday = "Yesterday";
+                            notifs[index] = notification;
+                            num += 1;
                         }else{
-
+                            notification.tomorrow = "";
+                            notification.today = "";
+                            notification.yesterday = "";
+                            notifs[index] = notification;
+                            num += 1;
                         }
                     }
                 });
-
+                
                 engineerModel.find().sort({name: 1}).exec((err, engineers) =>{
                     if(err) throw err;
                     else{
@@ -419,7 +435,7 @@ module.exports = {
                         scheduleModel.find().sort({date: 1}).exec((err, schedules) =>{
                             if(err) throw err;
         
-                            res.render('admin/admin', {engineers: engineers, schedules: schedules, notifications: notification, num: num});
+                            res.render('admin/admin', {engineers: engineers, schedules: schedules, notifications: notifs, num: num});
                         });
                     }
                 });

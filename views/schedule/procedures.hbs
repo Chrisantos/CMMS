@@ -23,7 +23,7 @@
         <header class="topbar" data-navbarbg="skin5">
             <nav class="navbar top-navbar navbar-expand-md navbar-dark">
                 <div class="navbar-header" data-logobg="skin5">
-                    <a class="navbar-brand" href="/chat/chat-engineer/{{engineer_username}}">
+                    <a class="navbar-brand" href="/maintenance/procedures">
                         <!-- Logo icon -->
                         <b class="logo-icon p-l-10">
                             <!--You can put here icon as well // <i class="wi wi-sunset"></i> //-->
@@ -141,113 +141,43 @@
                 <div class="row">
                     <div class="col-12">
                         <div class="card">
-                            <h2 class="card-title text-center" style="margin-top:10px;">{{name}}</h2>
+                            <h2 class="card-title text-center" style="margin-top:10px;">Preventive Maintenance Procedures</h2>
                             <div class="card-body">
+                                {{#if procedures}}
                                 <div class="chat-box scrollable" style="height:475px;">
-                                    <!--chat Row -->
-                                    <ul class="chat-list">
-                                        {{#each messages_other}}
-                                            <!--chat Row -->
-                                            <li class="chat-item">
-                                                <div class="chat-img"><img src="/assets/images/users/4.jpg" alt="user"></div>
-                                                <div class="chat-content">
-                                                    <h6 class="font-medium">{{from}}</h6>
-                                                    <div class="box bg-light-info">{{message}}</div>
-                                                </div>
-                                                <div class="chat-time">{{chat_date}}</div>
-                                            </li>
-                                        {{/each}}
-                                        {{#each messages_me}}
-                                            <!--chat Row -->
-                                            <li class="odd chat-item" style="margin-right:5px;">
-                                                <div class="chat-content">
-                                                    <div class="box bg-light-inverse">{{message}}</div>
-                                                    <div class="chat-time">{{chat_date}}</div>
-                                                    <br>
-                                                </div>
-                                            </li>
-                                        {{/each}}
-                                        <!--workorders -->
-                                        {{#each workOrders}}
-                                            <!--chat Row -->
-                                            <li class="chat-item">
-                                                <div class="chat-img"><img src="/assets/images/users/1.jpg" alt="user"></div>
-                                                <div class="chat-content">
-                                                    <h6 class="font-medium" style="font-style:italic;">Work Order</h6> <br>
-                                                    <div class="box bg-light-inverse">
-                                                        <p><strong>Equipment Name: </strong> {{equipt_name}}</p>  
-                                                        <p><strong>ID: </strong> {{equipt_id}}</p>
-                                                        <p><strong>Location: </strong> {{department}} <strong>at: </strong> {{equipt_loc}}</p>
-                                                        <p><strong>Spares: </strong> {{spares}}</p>
-                                                        <p><strong>Engineer Username: </strong> {{engineer_username}}</p>
-                                                    </div>
-                                                </div>
-                                                <div class="chat-time">{{time}}</div>
-                                            </li>
-                                        {{/each}}
-                                        <!--chat Row -->
-                                    </ul>
+                                    <table class="table">
+                                        <thead>
+                                            <tr>
+                                                <th scope="col"><h5>Equipment</h5></th>
+                                                <th scope="col"><h5>Location</h5></th>
+                                                <th scope="col"><h5>Procedures</h5></th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            {{#each procedures}}
+                                            <tr>
+                                                <td>{{equipt}}</td>
+                                                <td>{{location}}</td>
+                                                <td>{{procedures}}</td>
+                                            </tr>
+                                            {{/each}}
+                                        </tbody>
+                                    </table>
                                 </div>
+                                {{else}}
+                                    <h5 class="text-center"><em>Nothing to display</em></h5>
+                                {{/if}}
                             </div>
-                            <div class="accordion" id="accordionExample">
-                                <div class="card m-b-0">
-                                    <div class="card-header" id="headingOne">
-                                    <h6 class="mb-0">
-                                        <a  data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                                            <i class="fas fa-paper-plane" aria-hidden="true"></i>
-                                            <span style="color:rgb(94, 94, 245)">Text Message</span>
-                                        </a>
-                                    </h6>
-                                    </div>
-                                    <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordionExample">
-                                    <div class="card-body border-top">
-                                        <form action="/engineer_r" method="post" id="plain_message">
-                                            <div class="row">
-                                                <div class="col-9">
-                                                    <div class="input-field m-t-0 m-b-0">
-                                                        <textarea id="message" name="message" placeholder="Type and enter" class="form-control border-0"></textarea>
-                                                    </div>
-                                                </div>
-                                                <input type="hidden" name="name" value="{{name}}">
-                                                <div class="col-3">
-                                                    <a class="btn-circle btn-lg btn-cyan float-right text-white" onclick="document.getElementById('plain_message').submit(); return false;"><i class="fas fa-paper-plane"></i></a>
-                                                </div>
-                                            </div>
-                                        </form>
-                                    </div>
-                                    </div>
-                                </div>
-                            </div>
-                            
                         </div>
                     </div>
                 </div>
-                <!-- ============================================================== -->
-                <!-- End PAge Content -->
-                <!-- ============================================================== -->
-                <!-- ============================================================== -->
-                <!-- Right sidebar -->
-                <!-- ============================================================== -->
-                <!-- .right-sidebar -->
-                <!-- ============================================================== -->
-                <!-- End Right sidebar -->
-                <!-- ============================================================== -->
+                
             </div>
-            <!-- ============================================================== -->
-            <!-- End Container fluid  -->
-            <!-- ============================================================== -->
-            <!-- ============================================================== -->
-            <!-- footer -->
-            <!-- ============================================================== -->
+            
             <footer class="footer text-center">
                 All Rights Reserved by CMMS. Designed and Developed by <a href="https://linkedin.com/in/chrisantuseze">Chrisantus Eze</a>.
             </footer>
-            <!-- ============================================================== -->
-            <!-- End footer -->
-            <!-- ============================================================== -->
-        <!-- ============================================================== -->
-        <!-- End Page wrapper  -->
-        <!-- ============================================================== -->
+            
     </div>
     <!-- ============================================================== -->
     <!-- End Wrapper -->

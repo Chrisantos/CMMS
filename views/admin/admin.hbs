@@ -115,12 +115,12 @@
                                             {{#if notifications}}
                                                 {{#each notifications}}
                                                 <!-- Message -->
-                                                <a href="/schedule/notification/{{maint_id}}" class="link border-top">
+                                                <a href="/maintenance/schedule/{{maint_id}}" class="link border-top">
                                                     <div class="d-flex no-block align-items-center p-10">
                                                         <span class="btn btn-success btn-circle"><i class="ti-calendar"></i></span>
                                                         <div class="m-l-10">
-                                                            <h5 class="m-b-0">{{equipt_name}}</h5> 
-                                                            <span class="mail-desc">{{due_date}}</span> 
+                                                            <h5 class="m-b-0">{{equipt}}</h5> 
+                                                            <span class="mail-desc">{{due_date}} <strong>{{today}} {{tomorrow}} {{yesterday}}</strong></span> 
                                                         </div>
                                                     </div>
                                                 </a>
@@ -367,7 +367,7 @@
                         <div class="card">
                             <div class="card-body">
                                 <h4 class="card-title">Schedules</h4>
-                                <div class="todo-widget scrollable" style="height:350px;">
+                                <div class="todo-widget scrollable">
                                     <ul class="list-task todo-list list-group m-b-0" data-role="tasklist">
                                         {{#if schedules}}
                                         {{#each schedules}}

@@ -49,6 +49,8 @@ router.get('/edit-preventive/:maint_id', adminSessionChecker, scheduleController
 router.get('/delete-schedule/:schedule_id', adminSessionChecker, scheduleController.deleteSchedule);
 router.get('/delete-schedule-admin/:schedule_id', adminSessionChecker, scheduleController.deleteScheduleAdmin);
 
+router.get('/procedures', scheduleController.procedures);
+
 router.post('/add-schedule', scheduleController.saveSchedule);
 router.post('/add-preventive', scheduleController.savePrevMaint);
 router.post('/update-preventive', scheduleController.updatePrevMaint);

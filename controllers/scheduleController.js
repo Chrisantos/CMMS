@@ -92,16 +92,16 @@ module.exports = {
         newSchedule.save((err) =>{
             if(err) throw err;
             else{
-                // prevMaintModel.findOne({equipt_id: equipt_id}, (err, maintenance) =>{
-                //     if(err) throw err;
-                //     else if(!maintenance){
-                //         res.render('schedule/newSchedule', {error: 'No preventive maintenance record'});
-                //     }
-                //     else{
-                        let location  = "";
+                prevMaintModel.findOne({equipt: equipt}, (err, maintenance) =>{
+                    if(err) throw err;
+                    else if(!maintenance){
+                        res.render('schedule/newSchedule', {error: 'No preventive maintenance record'});
+                    }
+                    else{
+                        let location  = maintenance.location;
                         let maint_id  = schedule_id;
-                        let due_day   = date.substr(3,1);
-                        let due_month = date.substr(0,2);
+                        let due_day   = date.substr(8,2);
+                        let due_month = date.substr(5,2);
                         let newNotif  = new notifModel({
                             maint_id,
                             equipt,
@@ -111,12 +111,14 @@ module.exports = {
                             due_month
                         });
 
+                        console.log(newNotif);
+
                         newNotif.save((err) =>{
                             if(err) throw err;
                             res.redirect('/maintenance/schedule');
                         });
-                //     }
-                // });
+                    }
+                });
             }
                 
         });
@@ -260,33 +262,11 @@ module.exports = {
         });
     },
 
-    notif: (req, res) =>{
-        let date       = new Date();
-        let day        = date.getDay();
-        let month      = date.getMonth();  
-
-        notifs.find().sort({due_date: 1}).exec((err, notifications) =>{
+    procedures: (req, res) =>{
+        prevMaintModel.find().sort({equipt: 1}).exec((err, procedures) =>{
             if(err) throw err;
-            else{
-                let notification = null;
-                notifications.forEach((index, notif) =>{
-                    if(month == notif.due_month){
-                        if(day == notif.due_day){
-                            notification[index] = notif;
-                        }else if((day-1) == notif.due_day){
-                            notification[index] = notif;
-                        }else if((day-2) == notif.due_day){
-                            notification[index] = notif;
-                        }else{
-
-                        }
-                    }
-                });
-
-                // res.render();
-            }
-        })
-
+            res.render('schedule/procedures', {procedures: procedures});
+        });
     },
 
 };
