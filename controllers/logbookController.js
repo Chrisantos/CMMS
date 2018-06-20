@@ -42,33 +42,6 @@ module.exports = {
                 res.render('lbnR/logbook', {logs: logs});
         });
     },
-    getReport: (req, res) =>{
-        let selectedMonth   = req.body.selected_month;    //Report should be displayed based on the month chosen
-        let date = new Date();
-        let month = date.getMonth();
-        // logBookModel.find({repair_month: selectedMonth}, (err, logs) =>{
-        logBookModel.find({repair_month: month}, (err, logs) =>{
-            if(err) throw err;
-            else{
-                let reportInfo = null;
-                let sum = 0;
-                logs.forEach((index, log) =>{   //reportInfo should be an array that contains logs of different equipts previously created
-                    reportInfo[index] = log;
-                    sum = sum + log.cost;    
-                })
-                let reports = {             //reports is 
-                    report_id: 1,
-                    repair_month: month,
-                    date: date,
-                    total_cost: sum,
-                    reportInfo: reportInfo
-    
-                };
-                res.render('lbnR/report', {reports: reports});
-            }
-            
-        })
-    },
     // removeReport: (req, res) =>{
     //     let report_id = req.body.report_id;
     //     reportModel.findOneAndRemove({report_id: report_id}, (err, report) =>{
@@ -216,5 +189,45 @@ module.exports = {
                 res.redirect('/');
             }
         })
-    }
+    },
+
+    getReport: (req, res) =>{
+        let selectedMonth   = req.query.month;    //Report should be displayed based on the month chosen
+        let date            = new Date();
+        let currentMonth    = date.getMonth() + 1;
+        let month           = 0;
+        let months  = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September','October', 'November', 'December'];
+        let days    = ['Sun', 'Mon', 'Tue', 'Wed', 'Thur', 'Fri', 'Sat'];
+
+        let date_generated  = `${days[date.getDay()]}, ${months[currentMonth - 1]} ${date.getDate()} ${date.getFullYear()}`;
+
+        if(selectedMonth){
+            month = selectedMonth;
+        }else{
+            month = currentMonth;
+        }
+
+        logBookModel.find({repair_month: month}, (err, logs) =>{
+            if(err) throw err;
+            else{
+                let reportInfo = [];
+                let sum = 0;
+                logs.forEach((log, index) =>{   //reportInfo should be an array that contains logs of different equipts previously created
+                    reportInfo[index] = log;
+                    sum = sum + log.cost;    
+                });
+                
+                res.render('lbnR/report', 
+                    { 
+                        report_id: month,
+                        repair_month: months[month - 1],
+                        date: date_generated,
+                        total_cost: sum,
+                        reportInfo: reportInfo
+        
+                    });
+            }
+            
+        })
+    },
 }

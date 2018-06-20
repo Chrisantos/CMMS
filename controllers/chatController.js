@@ -134,12 +134,13 @@ module.exports = {
                                         chatMessagesFrom = chatss;
                                         res.render('hr/engineerIndex', 
                                                 {
-                                                    name: name, 
+                                                    name,
+                                                    username, 
                                                     messages_other: chatMessagesTo, 
                                                     messages_me: chatMessagesFrom, 
                                                     workOrders: workOrders,
                                                     notifications: notifs, 
-                                                    num: num
+                                                    num
                                                 });                                
                                     }
                                 });
@@ -155,7 +156,7 @@ module.exports = {
     chatOperator: (req, res) =>{
         let chatMessages = null;
         let cmRequests   = null;
-        let username  = req.operatorsession.user.username;  //Should be changed with session data
+        let username  = req.operatorsession.user.username;
         let name  = req.operatorsession.user.name;
 
         chatModel.find({to: username} , (err, chats) =>{
@@ -175,14 +176,15 @@ module.exports = {
                                         res.render('hr/operatorIndex', 
                                                 {
                                                     name, 
+                                                    username,
                                                     requests: cmRequests, 
                                                     messages_other: chatMessages,
                                                     departments,
                                                     equipments
-                                                });    //when sent needs to update the chat page  
+                                                });  
                                     
                                     }
-                                })
+                                });
                             }
                         })
                     }

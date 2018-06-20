@@ -263,10 +263,65 @@ module.exports = {
     },
 
     procedures: (req, res) =>{
-        prevMaintModel.find().sort({equipt: 1}).exec((err, procedures) =>{
+        let username  = req.engineersession.user.username;
+
+        let date       = new Date();
+        let day        = date.getDate();
+        let month      = date.getMonth() + 1;  
+        let num        = 0;
+        let notifs     = [];
+        let tomorrow   = null;
+        let today      = null;
+        let yesterday  = null;
+        notifModel.find({due_month: month}, (err, notifications) =>{
             if(err) throw err;
-            res.render('schedule/procedures', {procedures: procedures});
-        });
+            else{
+                notifications.forEach((notification, index) =>{
+                    if((notification.due_day == (day-1)) || (notification.due_day == day) || (notification.due_day == (day + 1)) || (notification.due_day == (day + 2))){
+                        
+                        if(notification.due_day == (day)){
+                            notification.today = "Today";
+                            notification.tomorrow = "";
+                            notification.yesterday = "";
+                            notifs[index] = notification;
+                            num += 1;
+                        }else if(notification.due_day == (day + 1)){
+                            notification.tomorrow = "Tomorrow";
+                            notification.today = "";
+                            notification.yesterday = "";
+                            notifs[index] = notification;
+                            num += 1;
+                        }else if(notification.due_day == (day - 1)){
+                            notification.tomorrow = "";
+                            notification.today = "";
+                            notification.yesterday = "Yesterday";
+                            notifs[index] = notification;
+                            num += 1;
+                        }else{
+                            notification.tomorrow = "";
+                            notification.today = "";
+                            notification.yesterday = "";
+                            notifs[index] = notification;
+                            num += 1;
+                        }
+                    }
+                });
+                prevMaintModel.find().sort({equipt: 1}).exec((err, procedures) =>{
+                    if(err) throw err;
+                    else{
+                        res.render('schedule/procedures', 
+                        {
+                            username,
+                            notifications: notifs, 
+                            num,
+                            procedures
+                        });
+                    }
+                });
+
+            } 
+        });  
+                                                                        
     },
 
 };

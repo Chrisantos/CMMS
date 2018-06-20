@@ -194,7 +194,6 @@
                         <li class="sidebar-item"> <a class="sidebar-link has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="mdi mdi-move-resize-variant"></i><span class="hide-menu">Others </span></a>
                             <ul aria-expanded="false" class="collapse  first-level">
                                 <li class="sidebar-item"><a href="/pages-gallery" class="sidebar-link"><i class="mdi mdi-multiplication-box"></i><span class="hide-menu"> Gallery </span></a></li>
-                                <li class="sidebar-item"><a href="/pages-calendar" class="sidebar-link"><i class="mdi mdi-calendar-check"></i><span class="hide-menu"> Calendar </span></a></li>
                                 <li class="sidebar-item"><a href="/reports" class="sidebar-link"><i class="mdi mdi-bulletin-board"></i><span class="hide-menu"> Reports </span></a></li>
                                 <li class="sidebar-item"><a href="/chat" class="sidebar-link"><i class="mdi mdi-message-outline"></i><span class="hide-menu"> Chat </span></a></li>
                             </ul>
@@ -221,10 +220,32 @@
                         <h4 class="page-title">REPORTS</h4>
                         <div class="ml-auto text-right">
                             <nav aria-label="breadcrumb">
-                                <ol class="breadcrumb">
-                                    <li class="breadcrumb-item"><a href="/">Home</a></li>
-                                    <li class="breadcrumb-item active" aria-current="page"><a href="/admin">Admin</a></li>
-                                </ol>
+                                <form action="/reports" method="get">
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <select name="month" id="month" class="form-control">
+                                                <option>Select Month</option>
+                                                <option value="1">January</option>
+                                                <option value="2">February</option>
+                                                <option value="3">March</option>
+                                                <option value="4">April</option>
+                                                <option value="5">May</option>
+                                                <option value="6">June</option>
+                                                <option value="7">July</option>
+                                                <option value="8">August</option>
+                                                <option value="9">September</option>
+                                                <option value="10">October</option>
+                                                <option value="11">November</option>
+                                                <option value="12">December</option>
+                                            </select>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <input type="submit" class="btn btn-info" value="Generate Report">
+                                        </div>
+                                    </div>
+                                    
+                                    
+                                </form>
                             </nav>
                         </div>
                     </div>
@@ -244,14 +265,14 @@
                     <div class="col-md-12">
                         {{!-- {{#each reports}} --}}
                         <div class="card card-body printableArea">
-                            <h3><b>REPORT ID</b> <span class="pull-right">#{{reports.report_id}}</span></h3>
+                            <h3><b>REPORT ID</b> <span class="pull-right">#{{report_id}}</span></h3>
                             <hr>
                             <div class="row">
                                 <div class="col-md-12">
                                     <div class="pull-right text-right">
                                         <address>
-                                            <p class="m-t-30"><b>Report Month :</b> <i class="fa fa-calendar"></i> {{reports.repair_month}}</p>
-                                            <p><b>Date Generated :</b> <i class="fa fa-calendar"></i> {{reports.date}}</p>
+                                            <p class="m-t-30"><b>Report Month :</b> <i class="fa fa-calendar"></i> {{repair_month}}</p>
+                                            <p><b>Date Generated :</b> <i class="fa fa-calendar"></i> {{date}}</p>
                                         </address>
                                     </div>
                                 </div>
@@ -260,25 +281,25 @@
                                         <table class="table table-hover">
                                             <thead>
                                                 <tr>
-                                                    <th class="text-center">Eqpt ID</th>
+                                                    <th class="text-center">Equipment</th>
                                                     <th>Fault</th>
                                                     <th class="text-right">Spares</th>
                                                     <th class="text-right">Failure Date</th>
                                                     <th class="text-right">Repair Date</th>
                                                     <th class="text-right">Location</th>
-                                                    <th class="text-right">Engineer Username</th>
+                                                    <th class="text-right">Engineer</th>
                                                     <th class="text-right">Cost</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                {{#each reports.reportInfo}}
+                                                {{#each reportInfo}}
                                                 <tr>
-                                                    <td class="text-center"> {{equipt_id}} </td>
+                                                    <td class="text-center"> {{equipt}} </td>
                                                     <td> {{fault}} </td>
                                                     <td class="text-right">{{spares_req}} </td>
                                                     <td class="text-right"> {{failure_date}} </td>
                                                     <td class="text-right"> {{repair_date}} </td>
-                                                    <td class="text-right"> {{location}} </td>
+                                                    <td class="text-right"> {{equipt_loc}} </td>
                                                     <td class="text-right"> {{engineer_username}} </td>
                                                     <td class="text-right"> #{{cost}} </td>
                                                 </tr>
@@ -290,7 +311,7 @@
                                 <div class="col-md-12">
                                     <div class="pull-right m-t-30 text-right">
                                         <hr>
-                                        <h3><b>Total :</b> #{{reports.total_cost}} </h3>
+                                        <h3><b>Total :</b> #{{total_cost}} </h3>
                                     </div>
                                     <div class="clearfix"></div>
                                     <hr>

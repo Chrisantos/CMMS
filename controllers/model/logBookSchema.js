@@ -6,7 +6,7 @@ let schema = new Schema({
     equipt:             String,
     fault:              String,
     spares_req:         String,
-    cost:               String,
+    cost:               Number,
     failure_date:       String,
     repair_date:        String,
     repair_month:       Number,

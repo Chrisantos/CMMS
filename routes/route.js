@@ -111,6 +111,7 @@ module.exports = (app) =>{
     
 
     app.get('/reports', adminSessionChecker, logbookController.getReport);
+    app.get('/reports/:month', adminSessionChecker, logbookController.getReport);
     
     app.get('/departments', adminSessionChecker, otherController.department);
     app.get('/new-department', adminSessionChecker, otherController.newDepartment);
