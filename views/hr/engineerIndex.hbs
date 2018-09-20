@@ -71,7 +71,7 @@
                                                 {{#each notifications}}
                                                 <!-- Message -->
                                                 {{!-- <a href="/maintenance/schedule/{{maint_id}}" class="link border-top"> --}}
-                                                <a href="javascript:void(0)" class="link border-top"></a>
+                                                <a href="/{{type}}-maintenance" class="link border-top"></a>
                                                     <div class="d-flex no-block align-items-center p-10">
                                                         <span class="btn btn-success btn-circle"><i class="ti-calendar"></i></span>
                                                         <div class="m-l-10">
@@ -103,12 +103,26 @@
                                     <li>
                                         <div class="">
                                             <!-- Message -->
-                                            <a href="/maintenance/procedures" class="link border-top">
+                                            <a href="/procedure" class="link border-top">
                                                 <div class="d-flex no-block align-items-center p-10">
                                                     <span class="btn btn-info btn-circle"><i class="ti-settings"></i></span>
                                                     <div class="m-l-10">
                                                         <h5 class="m-b-0">Maintenance</h5> 
                                                         <span class="mail-desc">View maintenance procedures</span> 
+                                                    </div>
+                                                </div>
+                                            </a>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <div class="">
+                                            <!-- Message -->
+                                            <a href="/eng_duty-roaster" class="link border-top">
+                                                <div class="d-flex no-block align-items-center p-10">
+                                                    <span class="btn btn-info btn-circle"><i class="ti-settings"></i></span>
+                                                    <div class="m-l-10">
+                                                        <h5 class="m-b-0">Duty Roaster</h5> 
+                                                        <span class="mail-desc">View duty roaster</span> 
                                                     </div>
                                                 </div>
                                             </a>
@@ -179,14 +193,14 @@
                                                 <div class="chat-content">
                                                     <h6 class="font-medium" style="font-style:italic;">Work Order</h6> <br>
                                                     <div class="box bg-light-inverse">
-                                                        <p><strong>Equipment Name: </strong> {{equipt_name}}</p>  
-                                                        <p><strong>ID: </strong> {{equipt_id}}</p>
+                                                        <p><strong>Equipment Name: </strong> {{equipt}}</p>
                                                         <p><strong>Location: </strong> {{department}} <strong>at: </strong> {{equipt_loc}}</p>
                                                         <p><strong>Spares: </strong> {{spares}}</p>
-                                                        <p><strong>Engineer Username: </strong> {{engineer_username}}</p>
+                                                        <p><strong>Accessories: </strong> {{accessories}}</p>
+                                                        <p><strong>Fault: </strong> {{fault}}</p>
                                                     </div>
                                                 </div>
-                                                <div class="chat-time">{{time}}</div>
+                                                <div class="chat-time">{{date_sent}}</div>
                                             </li>
                                         {{/each}}
                                         <!--chat Row -->
@@ -205,6 +219,7 @@
                                     </div>
                                     <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordionExample">
                                     <div class="card-body border-top">
+                                        <div id="validation"></div>
                                         <form action="/engineer_r" method="post" id="plain_message">
                                             <div class="row">
                                                 <div class="col-9">
@@ -226,39 +241,11 @@
                         </div>
                     </div>
                 </div>
-                <!-- ============================================================== -->
-                <!-- End PAge Content -->
-                <!-- ============================================================== -->
-                <!-- ============================================================== -->
-                <!-- Right sidebar -->
-                <!-- ============================================================== -->
-                <!-- .right-sidebar -->
-                <!-- ============================================================== -->
-                <!-- End Right sidebar -->
-                <!-- ============================================================== -->
             </div>
-            <!-- ============================================================== -->
-            <!-- End Container fluid  -->
-            <!-- ============================================================== -->
-            <!-- ============================================================== -->
-            <!-- footer -->
-            <!-- ============================================================== -->
             <footer class="footer text-center">
                 All Rights Reserved by CMMS. Designed and Developed by <a href="https://linkedin.com/in/chrisantuseze">Chrisantus Eze</a>.
             </footer>
-            <!-- ============================================================== -->
-            <!-- End footer -->
-            <!-- ============================================================== -->
-        <!-- ============================================================== -->
-        <!-- End Page wrapper  -->
-        <!-- ============================================================== -->
     </div>
-    <!-- ============================================================== -->
-    <!-- End Wrapper -->
-    <!-- ============================================================== -->
-    <!-- ============================================================== -->
-    <!-- All Jquery -->
-    <!-- ============================================================== -->
     <script src="../../assets/libs/jquery/dist/jquery.min.js"></script>
     <!-- Bootstrap tether Core JavaScript -->
     <script src="../../assets/libs/popper.js/dist/umd/popper.min.js"></script>
@@ -272,6 +259,18 @@
     <script src="../../dist/js/sidebarmenu.js"></script>
     <!--Custom JavaScript -->
     <script src="../../dist/js/custom.min.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function(){
+            let message     = $('#message').val();
+            let wps = /^\s*$/;
+            //Learn how to check if a button has been clicked
+            if(wps.test(message)){
+                $('#validation').text("Field must not be empty");
+                return false;
+            }
+            
+        });
+    </script>
 </body>
 
 </html>

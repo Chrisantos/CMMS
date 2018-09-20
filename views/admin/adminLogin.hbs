@@ -10,13 +10,24 @@
 	<link rel="stylesheet" type="text/css" href="/fonts/Linearicons-Free-v1.0.0/icon-font.min.css">
 	<link rel="stylesheet" type="text/css" href="/css/util.css">
 	<link rel="stylesheet" type="text/css" href="/css/main.css">
+	<style>
+        .error{
+            color: red;
+            margin-left: 5px;
+        },
+        label.error{
+            display: inline;
+        }
+
+    </style>
 </head>
 <body>
 	
 	<div class="limiter">
 		<div class="container-login100">
 			<div class="wrap-login100 p-l-85 p-r-85 p-t-55 p-b-55">
-				<form class="login100-form validate-form flex-sb flex-w" method="POST" action="/admin-login">
+				<div id="validation"></div>
+				<form class="login100-form validate-form flex-sb flex-w" method="POST" action="/admin-login" name="admin_form">
 					<span class="login100-form-title p-b-32">
 						Admin - Login
 					</span>
@@ -25,7 +36,7 @@
 						Username
 					</span>
 					<div class="wrap-input100 validate-input m-b-36" data-validate = "Username is required">
-						<input class="input100" type="text" name="username" id="username">
+						<input class="input100" type="text" name="username" id="username" required = "required">
 						<span class="focus-input100"></span>
 					</div>
 					
@@ -33,7 +44,7 @@
 						Password
 					</span>
 					<div class="wrap-input100 validate-input m-b-12" data-validate = "Password is required">
-						<input class="input100" type="password" name="password" id="password">
+						<input class="input100" type="password" name="password" id="password"  required = "required">
 						<span class="focus-input100"></span>
 					</div>
 
@@ -55,6 +66,49 @@
 
 	<div id="dropDownSelect1"></div>
 	<script src="/vendor/bootstrap/js/bootstrap.min.js"></script>
+	{{!-- <script type="text/javascript">
+		$(document).ready(function(){
+			let username = $('#username').val();
+			let password = $('#password').val();
+			let wps = /^\s*$/;
+			if(wps.test(username) || wps.test(password)){
+				$('#validation').text("All Fields must be filled");
+				return false;
+			}
+			
+		});
+	</script> --}}
+	<script src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/jquery.validate.min.js"></script>
+<script>
+$("form[name='admin_form']").validate({
+            // Specify validation rules
+            rules: {
+            // The key name on the left side is the name attribute
+            // of an input field. Validation rules are defined
+            // on the right side
+            username: "required",
+            password: "required",
+            password: {
+                required: true,
+                minlength: 5
+            }
+            },
+            // Specify validation error messages
+            messages: {
+            username: "Please enter your username",
+            password: {
+                required: "Please provide a password",
+                minlength: "Your password must be at least 5 characters long"
+            },
+            
+            },
+            // Make sure the form is submitted to the destination defined
+            // in the "action" attribute of the form when valid
+            submitHandler: function(form) {
+            form.submit();
+            }
+        });
+    </script>
 
 </body>
 </html>

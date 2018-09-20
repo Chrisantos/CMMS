@@ -9,6 +9,7 @@ const engineerModel         = require('../controllers/model/engineerSchema');
 const chatController        = require('../controllers/chatController');
 const multipart             = require('connect-multiparty');
 const multipartMiddleware   = multipart();
+const scheduleController    = require('../controllers/scheduleController');
 
 
 module.exports = (app) =>{
@@ -107,6 +108,7 @@ module.exports = (app) =>{
     app.get('/chat', adminSessionChecker, chatController.chat);
     app.get('/work-order', adminSessionChecker, chatController.workOrder);
 
+
     app.get('/admin-logout', adminSessionChecker, hrController.adminLogout);
     
 
@@ -116,18 +118,32 @@ module.exports = (app) =>{
     app.get('/departments', adminSessionChecker, otherController.department);
     app.get('/new-department', adminSessionChecker, otherController.newDepartment);
     app.get('/duty-roaster', adminSessionChecker, otherController.dutyRoaster);
-
+    app.get('/new-duty-roaster', adminSessionChecker, otherController.newDutyRoaster);
+    
     app.get('/engineer-signin', hrController.engSignin);
     app.get('/operator-signin', hrController.opSignin);
     app.get('/admin-signin', hrController.adminSignin);
 
+    app.get('/corrective-maintenance', scheduleController.engCorrective);
+    app.get('/preventive-maintenance', scheduleController.engPreventive);
+
     app.post('/engineer-login', hrController.engLogin);
     app.post('/operator-login', hrController.opLogin);
     app.post('/admin-login', hrController.adminLogin);
+
+    app.get('/work-order', otherController.workOrder);
+    app.get('/edit-workorder/:id', otherController.editWorkOrder);
+    app.get('/work-order/:id', otherController.deleteWorkOrder);
+
+    app.get('/procedure', scheduleController.procedures);
+    app.get('/eng_duty-roaster', scheduleController.dutyRoaster);
     
     app.post('/add-department', otherController.addDepartment);
 
+    app.post('/add-duty-roaster', otherController.addDutyRoaster);
+
     app.post('/admin_w', chatController.sendWorkOrder);
+    app.post('/update-work-order', otherController.updateWorkOrder);
     app.post('/admin_r', chatController.sendReply);
     app.post('/operator_r', chatController.operatorRequest);
     app.post('/engineer_r', chatController.engineerReply);

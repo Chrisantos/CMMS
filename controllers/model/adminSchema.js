@@ -10,4 +10,4 @@ schema.pre('save', (next) =>{
     next();
 });
 
-module.exports = mongoose.model('admin', schema);
+module.exports = mongoose.model('administrator', schema);

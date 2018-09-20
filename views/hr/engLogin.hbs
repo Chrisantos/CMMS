@@ -28,7 +28,7 @@
 						Username
 					</span>
 					<div class="wrap-input100 validate-input m-b-36" data-validate = "Username is required">
-						<input class="input100" type="text" name="username" id="username">
+						<input class="input100" type="text" name="username" id="username" required ="required" >
 						<span class="focus-input100"></span>
 					</div>
 					
@@ -36,7 +36,7 @@
 						Password
 					</span>
 					<div class="wrap-input100 validate-input m-b-12" data-validate = "Password is required">
-						<input class="input100" type="password" name="password" id="password">
+						<input class="input100" type="password" name="password" id="password" required ="required" >
 						<span class="focus-input100"></span>
 					</div>
 
@@ -61,6 +61,19 @@
 	<script src="/vendor/bootstrap/js/popper.js"></script>
 	<script src="/vendor/bootstrap/js/bootstrap.min.js"></script>
 	<script src="/vendor/select2/select2.min.js"></script>
+
+	<script type="text/javascript">
+		$(document).ready(function(){
+			let username = $('#username').val();
+			let password = $('#password').val();
+			let wps = /^\s*$/;
+			if(wps.test(username) || wps.test(password)){
+				$('#validation').text("All Fields must be filled");
+				return false;
+			}
+			
+		});
+	</script>
 
 </body>
 </html>

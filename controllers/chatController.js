@@ -140,7 +140,7 @@ module.exports = {
                                                     messages_me: chatMessagesFrom, 
                                                     workOrders: workOrders,
                                                     notifications: notifs, 
-                                                    num
+                                                    num,
                                                 });                                
                                     }
                                 });
@@ -214,6 +214,9 @@ module.exports = {
 
         let date            = new Date();
         let wo_id           = date.getDay() + date.getMonth();
+        
+
+        let date_sent       = `${date.getDate()}/${date.getMonth() + 1} at ${date.getHours()}:${date.getMinutes()}`;
 
         let newWO           = new workOrderModel({
             wo_id,
@@ -223,7 +226,8 @@ module.exports = {
             department,
             accessories,
             fault,
-            engineer_username
+            engineer_username,
+            date_sent
         });
 
         newWO.save((err) =>{

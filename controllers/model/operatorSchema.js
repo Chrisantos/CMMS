@@ -5,7 +5,7 @@ let schema = new Schema({
     name:           String,
     password:       String,
     department:     String,
-    username:       String,      //Auto-generated
+    username:       String,
     phone:          String
 });
 

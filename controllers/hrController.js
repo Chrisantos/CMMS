@@ -1,91 +1,12 @@
 const engineerModel     = require('./model/engineerSchema');
 const adminModel        = require('./model/adminSchema');
-const operatoreModel    = require('./model/operatorSchema');
+const operatorModel    = require('./model/operatorSchema');
 const notifModel        = require('./model/notificationSchema');
-const scheduleModel     = require('./model/scheduleSchema');
+const scheduleModel     = require('./model/correctiveSchema');
 const departmentModel   = require('./model/departmentSchema');
+const bcrypt            = require('bcrypt');
 
 module.exports = {
-    // adminDashBoard: (req, res) =>{
-    //     let totalEquipts    = 0;
-    //     let totalSpares     = 0;
-    //     let totalAccessories= 0;
-    //     let totalOperators  = 0;
-    //     let totalEngineers  = 0;
-    //     let admin           = null;
-    //     let chats           = null;
-    //     let schedules       = null;
-    //     let notifications   = null;
-    //     let logbook         = null;
-    //     let totalDepartments= null;
-    //     let reports         = null;
-
-    //     engineerModel.find().sort({name: 1}).exec((err, engineers) =>{
-    //         if(err) throw err;
-    //         else{
-    //             let no_engineer = 0;
-    //             engineers.forEach((engineer) =>{
-    //                 no_engineer += 1;
-    //             });
-    //             totalEngineers = no_engineer;
-
-    //             scheduleModel.find().sort({date: 1}).exec((err, schedules) =>{
-    //                 if(err) throw err;
-
-    //                 res.render('admin/admin', {engineers: engineers, schedules: schedules});
-    //             });
-    //         }
-    //     });
-    //     operatorModel.find({}, (err, operators) =>{
-    //         if(err) throw err;
-    //         else{
-    //             let no_operator = 0;
-    //             operators.forEach((operator) =>{
-    //                 no_operator += 1;
-    //             });
-    //             totalOperators = no_operator;
-    //         }
-    //     });
-    //     equiptModel.find({}, (err, equipts) =>{
-    //         if(err) throw err;
-    //         else{
-    //             let no_equipt = 0;
-    //             equipts.forEach((equipt) =>{
-    //                 no_equipt += 1;
-    //             });
-    //             totalEquipts = no_equipt;
-    //         }
-    //     });
-    //     spareModel.find({}, (err, spares) =>{
-    //         if(err) throw err;
-    //         else{
-    //             let no_spares = 0;
-    //             spares.forEach((spare) =>{
-    //                 no_spares += 1;
-    //             });
-    //             totalSpares = no_spares;
-    //         }
-    //     });
-    //     accessoryModel.find({}, (err, accessories) =>{
-    //         if(err) throw err;
-    //         else{
-    //             let no_accessories = 0;
-    //             accessories.forEach((accessory) =>{
-    //                 no_accessories += 1;
-    //             });
-    //             totalAccessories = no_accessories;
-    //         }
-    //     });
-
-    // },
-    engDashboard: (req, res) =>{
-        res.render('hr/engineerDashboard');
-    },
-    opDashboard: (req, res) =>{
-        res.render('hr/operatorDashboard');
-    },
-
-
     newEng: (req, res) =>{
         res.render('hr/newEngineer');
     },
@@ -105,7 +26,7 @@ module.exports = {
     },
     editOp: (req, res) =>{
         let username = req.params.username;
-        operatoreModel.findOne({username: username}, (err, operator) =>{
+        operatorModel.findOne({username: username}, (err, operator) =>{
             if(err) res.send(err);
             else{
                 departmentModel.find().sort({name: 1}).exec((err, departments) =>{
@@ -116,28 +37,31 @@ module.exports = {
         });
     }, 
 
-    //Post requests
     addEng: (req, res) =>{
         let name        = req.body.name;
         let password    = req.body.password;
         let specialty   = req.body.specialty;
         let phone       = req.body.phone;
-        let username      = req.body.username;
+        let username    = req.body.username;
 
-        let newEngineer = new engineerModel({
-            name,
-            password,
-            specialty,
-            username,
-            phone
+        bcrypt.hash(password, 10, function(err, hash) {
+            let newEngineer = new engineerModel({
+                name,
+                password: hash,
+                specialty,
+                username,
+                phone
+            });
+    
+            newEngineer.save((err) =>{
+                if(err)
+                    res.render('hr/newEngineer', {error: "Error"});
+                else
+                    res.redirect('/hr/engineers');
+            });
         });
 
-        newEngineer.save((err) =>{
-            if(err)
-                res.render('hr/newEngineer', {error: "Error"});
-            else
-                res.redirect('/hr/engineers');
-        });
+        
     },
     addOp: (req, res) =>{
         let name        = req.body.name;
@@ -146,20 +70,24 @@ module.exports = {
         let phone       = req.body.phone;
         let username    = req.body.username;
 
-        let newOperator = new operatoreModel({
-            name,
-            password,
-            department,
-            username,
-            phone
+        bcrypt.hash(password, 10, function(err, hash) {
+            let newOperator = new operatorModel({
+                name,
+                password: hash,
+                department,
+                username,
+                phone
+            });
+    
+            newOperator.save((err) =>{
+                if(err)
+                    res.render('hr/newOperator', {error: err});
+                else
+                    res.redirect('/hr/operators');
+            });
         });
 
-        newOperator.save((err) =>{
-            if(err)
-                res.render('hr/newOperator', {error: err});
-            else
-                res.redirect('/hr/operators');
-        });
+        
     },
 
     updateEng: (req, res) =>{
@@ -168,19 +96,21 @@ module.exports = {
         let specialty   = req.body.specialty;
         let username    = req.body.username;    //as fetched from a hidden input box
         let phone       = req.body.phone;
-
-        engineerModel.findOneAndUpdate({username: username},
-        {
-            name,
-            password,
-            specialty,
-            username,
-            phone
-        }, (err, engineer) =>{
-            if(err)
-                res.render('hr/editEngineer', {error: err});
-            else
-                res.redirect('/hr/engineers')
+        
+        bcrypt.hash(password, 10, function(err, hash) {
+            engineerModel.findOneAndUpdate({username: username},
+            {
+                name,
+                password: hash,
+                specialty,
+                username,
+                phone
+            }, (err, engineer) =>{
+                if(err)
+                    res.render('hr/editEngineer', {error: err});
+                else
+                    res.redirect('/hr/engineers')
+            });
         });
     },
     updateOp: (req, res) =>{
@@ -190,18 +120,20 @@ module.exports = {
         let username    = req.body.username;        //as fetched from a hidden input box
         let phone       = req.body.phone;
 
-        operatoreModel.findOneAndUpdate({username: username},
-        {
-            name,
-            password,
-            department,
-            username,
-            phone
-        }, (err, operator) =>{
-            if(err)
-                res.render('hr/editOperator', {error: err});
-            else
-                res.redirect('/hr/operators')
+        bcrypt.hash(password, 10, function(err, hash) {
+            operatoreModel.findOneAndUpdate({username: username},
+            {
+                name,
+                password: hash,
+                department,
+                username,
+                phone
+            }, (err, operator) =>{
+                if(err)
+                    res.render('hr/editOperator', {error: err});
+                else
+                    res.redirect('/hr/operators');
+            });
         });
     },
 
@@ -222,12 +154,15 @@ module.exports = {
             else if(!engineer)
                 res.render('hr/engLogin', {error: `Username is incorrect`});
             else{
-                if(password !== engineer.password)
-                    res.render('hr/engLogin', {error: `Password is incorrect`});
-                else{
-                    req.engineersession.user = engineer;
-                    res.redirect('/engineer/'+username); 
-                }
+                bcrypt.compare(password, engineer.password, function(err, resp) {
+                    if(err)
+                        res.render('hr/engLogin', {error: `Password is incorrect`});
+                    else{
+                        req.engineersession.user = engineer;
+                        res.redirect('/engineer/:'+username); 
+                    }
+                });                    
+                
             }
         });
     },
@@ -235,20 +170,20 @@ module.exports = {
         let username    = req.body.username;
         let password    = req.body.password;
 
-        operatoreModel.findOne({username: username}, (err, operator) =>{
+        operatorModel.findOne({username: username}, (err, operator) =>{
             if(err)
                 res.render('hr/opLogin', {error: err});
             else if(!operator)
                 res.render('hr/opLogin', {error: `Username is incorrect`});
             else{
-                if(password !== operator.password)
+                bcrypt.compare(password, operator.password, function(err, resp) {
+                    if(err)
                     res.render('hr/opLogin', {error: `Password is incorrect`});
-                else{
-                    req.operatorsession.user = operator;
-                    console.log(req.operatorsession.user);
-                    res.redirect('/operator/'+username);
-                }
-                  
+                    else{
+                        req.operatorsession.user = operator;
+                        res.redirect('/operator/:'+username); 
+                    }
+                });
             }
         });
     },
@@ -272,7 +207,7 @@ module.exports = {
         });
     },
     allOps: (req, res) =>{
-        operatoreModel.find().sort({name: 1}).exec((err, operators) => {
+        operatorModel.find().sort({name: 1}).exec((err, operators) => {
             if(err)
                 res.render('hr/operators', {error: err});
             else
@@ -318,13 +253,13 @@ module.exports = {
     },
     removeOp: (req, res) =>{
         let username = req.params.username;
-        operatoreModel.findOneAndRemove({username: username}, (err, operator) =>{
+        operatorModel.findOneAndRemove({username: username}, (err, operator) =>{
             if(err)
                 res.render('hr/operators', {error: err});
             else if(!operator)
                 res.render('hr/operators', {error: 'No operator exists with such name'});
             else{
-                operatoreModel.find().sort({name: 1}).exec((errs, operators) => {
+                operatorModel.find().sort({name: 1}).exec((errs, operators) => {
                     if(errs)
                         res.render('hr/operators', {error: errs});
                     else
@@ -349,15 +284,41 @@ module.exports = {
             else if(!admin)
                 res.render('admin/adminLogin', {error: `Username is incorrect`});
             else{
-                if(password !== admin.password){
-                    res.render('admin/adminLogin', {error: `Password is incorrect`});                    
-                } else{
-                    req.adminsession.user = admin;
-                    res.redirect('/admin');
-                }
+                bcrypt.compare(password, admin.password, function(err, resp) {
+                    if(err)
+                    res.render('admin/adminLogin', {error: `Password is incorrect`});
+                    else{
+                        req.adminsession.user = admin;
+                        res.redirect('/admin'); 
+                    }
+                });
 
             }
         });
+    },
+
+    //Post requests
+    addAdmin: (req, res) =>{
+        // let password    = req.body.password;
+        // let username      = req.body.username;
+        let password = "admin";
+        let username = "admin";
+
+        console.log("Made request");
+
+        bcrypt.hash(password, 10, function(err, hash) {
+            let newAdmin = new adminModel({
+                password: hash,
+                username
+            });
+    
+            newAdmin.save((err) =>{
+                if(err)
+                    res.render('admin/adminLogin', {error: "Error"});
+                else
+                    res.redirect('/admin');
+            });
+        });  
     },
 
     adminLogout: (req, res) =>{
@@ -374,7 +335,7 @@ module.exports = {
     },
     anOperator: (req, res) =>{
         let username   = req.params.username;
-        operatoreModel.findOne({username: username}, (err, operator) =>{
+        operatorModel.findOne({username: username}, (err, operator) =>{
             if(err) throw err;
             res.render('hr/anOperator', {operator: operator});
         });

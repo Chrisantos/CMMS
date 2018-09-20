@@ -1,0 +1,5 @@
+{
+    "env":{
+        "mongoUri": "mongodb://chris:chris3003@ds163182.mlab.com:63182/cmms"
+    }
+}

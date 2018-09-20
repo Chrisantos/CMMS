@@ -5,12 +5,6 @@ const accessoryModel   = require('./model/accessorySchema');
 const operatorModel    = require('./model/operatorSchema');
 const departmentModel  = require('./model/departmentSchema');
 
-cloudinary.config({
-    cloud_name: 'cernetics',
-    api_key: '276336719369831',
-    api_secret: 'CoPW3VJsVSTg8w3z-qsLLs4UX_4'
-});
-
 module.exports = {
 
     newEquipt: (req, res) =>{

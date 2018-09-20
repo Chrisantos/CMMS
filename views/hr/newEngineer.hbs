@@ -36,30 +36,13 @@
                     <!-- ============================================================== -->
                     <!-- Logo -->
                     <!-- ============================================================== -->
-                    <a class="navbar-brand" href="index.html">
-                        <!-- Logo icon -->
+                    <a class="navbar-brand" href="/">
                         <b class="logo-icon p-l-10">
-                            <!--You can put here icon as well // <i class="wi wi-sunset"></i> //-->
-                            <!-- Dark Logo icon -->
                             <img src="/img/favicon.png" alt="homepage" class="light-logo" />
-                           
                         </b>
-                        <!--End Logo icon -->
-                         <!-- Logo text -->
                         <span class="logo-text" style="margin-top:8px;">
-                             <!-- dark Logo text -->
-                             {{!-- <img src="/assets/images/logo-text.png" alt="homepage" class="light-logo" /> --}}
                              <h3>CMMS - Admin</h3>
-                            
                         </span>
-                        <!-- Logo icon -->
-                        <!-- <b class="logo-icon"> -->
-                            <!--You can put here icon as well // <i class="wi wi-sunset"></i> //-->
-                            <!-- Dark Logo icon -->
-                            <!-- <img src="../../assets/images/logo-text.png" alt="homepage" class="light-logo" /> -->
-                            
-                        <!-- </b> -->
-                        <!--End Logo icon -->
                     </a>
                     <!-- ============================================================== -->
                     <!-- End Logo -->
@@ -88,7 +71,7 @@
                             </a>
                             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                                 <a class="dropdown-item" href="/hr/new-engineer">Engineer</a>
-                                <a class="dropdown-item" href="/hr/new-operator ">Operator</a>
+                                <a class="dropdown-item" href="/hr/new-operator ">User</a>
                             </div>
                         </li>
                         <!-- ============================================================== -->
@@ -136,34 +119,13 @@
                                 </ul>
                             </div>
                         </li>
-                        <!-- ============================================================== -->
-                        <!-- End Messages -->
-                        <!-- ============================================================== -->
-
-                        <!-- ============================================================== -->
-                        <!-- User profile and search -->
-                        <!-- ============================================================== -->
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle text-muted waves-effect waves-dark pro-pic" href="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img src="../../assets/images/users/1.jpg" alt="user" class="rounded-circle" width="31"></a>
-                            <div class="dropdown-menu dropdown-menu-right user-dd animated">
-                                <a class="dropdown-item" href="/admin/profile"><i class="ti-user m-r-5 m-l-5"></i> My Profile</a>
-                                <div class="dropdown-divider"></div>
-                                <a class="dropdown-item" href="/admin-logout"><i class="fa fa-power-off m-r-5 m-l-5"></i> Logout</a>
-                            </div>
-                        </li>
-                        <!-- ============================================================== -->
-                        <!-- User profile and search -->
-                        <!-- ============================================================== -->
+                        <a class="navbar-brand" href="/admin-logout" style="margin-top:13px">
+                            <i class="fas fa-sign-out-alt"></i>
+                        </a>
                     </ul>
                 </div>
             </nav>
         </header>
-        <!-- ============================================================== -->
-        <!-- End Topbar header -->
-        <!-- ============================================================== -->
-        <!-- ============================================================== -->
-        <!-- Left Sidebar - style you can find in sidebar.scss  -->
-        <!-- ============================================================== -->
         <aside class="left-sidebar" data-sidebarbg="skin5">
             <!-- Sidebar scroll-->
             <div class="scroll-sidebar">
@@ -185,16 +147,15 @@
                                 <li class="sidebar-item"><a href="/hr/operators" class="sidebar-link"><i class="mdi mdi-emoticon-cool"></i><span class="hide-menu"> Operator </span></a></li>
                             </ul>
                         </li>
-                        <li class="sidebar-item"> <a class="sidebar-link has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="mdi mdi-face"></i><span class="hide-menu">Maintenance </span></a>
+                        <li class="sidebar-item"> <a class="sidebar-link has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="mdi mdi-settings"></i><span class="hide-menu">Maintenance </span></a>
                             <ul aria-expanded="false" class="collapse  first-level">
-                                <li class="sidebar-item"><a href="/maintenance/preventive-maintenance" class="sidebar-link"><i class="mdi mdi-emoticon"></i><span class="hide-menu"> Preventive Maintenance </span></a></li>
-                                <li class="sidebar-item"><a href="/maintenance/schedule" class="sidebar-link"><i class="mdi mdi-emoticon-cool"></i><span class="hide-menu"> Schedules </span></a></li>
+                                <li class="sidebar-item"><a href="/maintenance/procedures" class="sidebar-link"><i class="mdi mdi-settings"></i><span class="hide-menu"> Procedures </span></a></li>
+                                <li class="sidebar-item"><a href="/maintenance/corrective-maintenance" class="sidebar-link"><i class="mdi mdi-settings"></i><span class="hide-menu"> Corrective Maintenance </span></a></li>
+                                <li class="sidebar-item"><a href="/maintenance/preventive-maintenance" class="sidebar-link"><i class="mdi mdi-settings"></i><span class="hide-menu"> Preventive Maintenance </span></a></li>
                             </ul>
                         </li>
                         <li class="sidebar-item"> <a class="sidebar-link has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="mdi mdi-move-resize-variant"></i><span class="hide-menu">Others </span></a>
                             <ul aria-expanded="false" class="collapse  first-level">
-                                <li class="sidebar-item"><a href="/pages-gallery" class="sidebar-link"><i class="mdi mdi-multiplication-box"></i><span class="hide-menu"> Gallery </span></a></li>
-                                <li class="sidebar-item"><a href="/pages-calendar" class="sidebar-link"><i class="mdi mdi-calendar-check"></i><span class="hide-menu"> Calendar </span></a></li>
                                 <li class="sidebar-item"><a href="/reports" class="sidebar-link"><i class="mdi mdi-bulletin-board"></i><span class="hide-menu"> Reports </span></a></li>
                                 <li class="sidebar-item"><a href="/chat" class="sidebar-link"><i class="mdi mdi-message-outline"></i><span class="hide-menu"> Chat </span></a></li>
                             </ul>
@@ -244,7 +205,8 @@
                     <!-- Column -->
                     <div class="col-md-9">
                         <div class="card">
-                            <form method="POST" action="/hr/add-engineer">
+                            <div id="validation"></div>
+                            <form method="POST" action="/hr/add-engineer" name="engineer_form">
                                 <div class="card-body">
                                     <p style="color:green">{{success}}</p>
                                     <p style="color:red">{{error}}</p>
@@ -283,7 +245,7 @@
                                 </div>
                                 <div class="border-top row">
                                     <div class="card-body col-md-6">
-                                        <input type="submit" value="Add" class="btn btn-primary">
+                                        <input type="submit" value="Add" class="btn btn-primary" id="submit">
                                     </div>
                                     <div class="col-md-6" style="margin-top:30px;">
                                         <strong><a href="/hr/engineers"> << Back</a></strong>
@@ -320,6 +282,60 @@
     <script src="/dist/js/custom.min.js"></script>
     <!-- this page js -->
     <script src="/assets/libs/toastr/build/toastr.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/jquery.validate.min.js"></script>
+    <script type="text/javascript">
+        //$(document).ready(function(){
+        //    $('#submit').click((event)=>{
+        //        let name     = $('#name').val();
+        //        let password     = $('#password').val();
+        //        let username     = $('#username').val();
+        //        let specialty     = $('#specialty').val();
+        //        let phone     = $('#phone').val();
+        //        let wps = /^\s*$/;
+        //        //Learn how to check if a button has been clicked
+        //        if(wps.test(name) || wps.test(password) || wps.test(username) || wps.test(specialty) || wps.test(phone)){
+        //            $('#validation').text("All Fields must be filled");
+        //            alert("All fields must be field");
+        //            return false;
+        //        }
+        //    })
+            
+        //});
+        $("form[name='engineer_form']").validate({
+            // Specify validation rules
+            rules: {
+            // The key name on the left side is the name attribute
+            // of an input field. Validation rules are defined
+            // on the right side
+            name: "required",
+            username: "required",
+            password: "required",
+            specialty: "required",
+            phone: "required",
+            password: {
+                required: true,
+                minlength: 5
+            }
+            },
+            // Specify validation error messages
+            messages: {
+            name: "Please enter your name",
+            specialty: "Please enter your specialty",
+            phone: "Please enter your phone",
+            username: "Please enter your username",
+            password: {
+                required: "Please provide a password",
+                minlength: "Your password must be at least 5 characters long"
+            },
+            
+            },
+            // Make sure the form is submitted to the destination defined
+            // in the "action" attribute of the form when valid
+            submitHandler: function(form) {
+            form.submit();
+            }
+        });
+    </script>
 
 </body>
 

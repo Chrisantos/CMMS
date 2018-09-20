@@ -36,30 +36,13 @@
                     <!-- ============================================================== -->
                     <!-- Logo -->
                     <!-- ============================================================== -->
-                    <a class="navbar-brand" href="index.html">
-                        <!-- Logo icon -->
+                    <a class="navbar-brand" href="/">
                         <b class="logo-icon p-l-10">
-                            <!--You can put here icon as well // <i class="wi wi-sunset"></i> //-->
-                            <!-- Dark Logo icon -->
                             <img src="/img/favicon.png" alt="homepage" class="light-logo" />
-                           
                         </b>
-                        <!--End Logo icon -->
-                         <!-- Logo text -->
                         <span class="logo-text" style="margin-top:8px;">
-                             <!-- dark Logo text -->
-                             {{!-- <img src="/assets/images/logo-text.png" alt="homepage" class="light-logo" /> --}}
                              <h3>CMMS - Admin</h3>
-                            
                         </span>
-                        <!-- Logo icon -->
-                        <!-- <b class="logo-icon"> -->
-                            <!--You can put here icon as well // <i class="wi wi-sunset"></i> //-->
-                            <!-- Dark Logo icon -->
-                            <!-- <img src="../../assets/images/logo-text.png" alt="homepage" class="light-logo" /> -->
-                            
-                        <!-- </b> -->
-                        <!--End Logo icon -->
                     </a>
                     <!-- ============================================================== -->
                     <!-- End Logo -->
@@ -88,7 +71,7 @@
                             </a>
                             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                                 <a class="dropdown-item" href="/hr/new-engineer">Engineer</a>
-                                <a class="dropdown-item" href="/hr/new-operator ">Operator</a>
+                                <a class="dropdown-item" href="/hr/new-operator ">User</a>
                             </div>
                         </li>
                         <!-- ============================================================== -->
@@ -136,34 +119,13 @@
                                 </ul>
                             </div>
                         </li>
-                        <!-- ============================================================== -->
-                        <!-- End Messages -->
-                        <!-- ============================================================== -->
-
-                        <!-- ============================================================== -->
-                        <!-- User profile and search -->
-                        <!-- ============================================================== -->
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle text-muted waves-effect waves-dark pro-pic" href="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img src="../../assets/images/users/1.jpg" alt="user" class="rounded-circle" width="31"></a>
-                            <div class="dropdown-menu dropdown-menu-right user-dd animated">
-                                <a class="dropdown-item" href="/admin/profile"><i class="ti-user m-r-5 m-l-5"></i> My Profile</a>
-                                <div class="dropdown-divider"></div>
-                                <a class="dropdown-item" href="/admin-logout"><i class="fa fa-power-off m-r-5 m-l-5"></i> Logout</a>
-                            </div>
-                        </li>
-                        <!-- ============================================================== -->
-                        <!-- User profile and search -->
-                        <!-- ============================================================== -->
+                        <a class="navbar-brand" href="/admin-logout" style="margin-top:13px">
+                            <i class="fas fa-sign-out-alt"></i>
+                        </a>
                     </ul>
                 </div>
             </nav>
         </header>
-        <!-- ============================================================== -->
-        <!-- End Topbar header -->
-        <!-- ============================================================== -->
-        <!-- ============================================================== -->
-        <!-- Left Sidebar - style you can find in sidebar.scss  -->
-        <!-- ============================================================== -->
         <aside class="left-sidebar" data-sidebarbg="skin5">
             <!-- Sidebar scroll-->
             <div class="scroll-sidebar">
@@ -185,16 +147,15 @@
                                 <li class="sidebar-item"><a href="/hr/operators" class="sidebar-link"><i class="mdi mdi-emoticon-cool"></i><span class="hide-menu"> Operator </span></a></li>
                             </ul>
                         </li>
-                        <li class="sidebar-item"> <a class="sidebar-link has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="mdi mdi-face"></i><span class="hide-menu">Maintenance </span></a>
+                        <li class="sidebar-item"> <a class="sidebar-link has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="mdi mdi-settings"></i><span class="hide-menu">Maintenance </span></a>
                             <ul aria-expanded="false" class="collapse  first-level">
-                                <li class="sidebar-item"><a href="/maintenance/preventive-maintenance" class="sidebar-link"><i class="mdi mdi-emoticon"></i><span class="hide-menu"> Preventive Maintenance </span></a></li>
-                                <li class="sidebar-item"><a href="/maintenance/schedule" class="sidebar-link"><i class="mdi mdi-emoticon-cool"></i><span class="hide-menu"> Schedules </span></a></li>
+                                <li class="sidebar-item"><a href="/maintenance/procedures" class="sidebar-link"><i class="mdi mdi-settings"></i><span class="hide-menu"> Procedures </span></a></li>
+                                <li class="sidebar-item"><a href="/maintenance/corrective-maintenance" class="sidebar-link"><i class="mdi mdi-settings"></i><span class="hide-menu"> Corrective Maintenance </span></a></li>
+                                <li class="sidebar-item"><a href="/maintenance/preventive-maintenance" class="sidebar-link"><i class="mdi mdi-settings"></i><span class="hide-menu"> Preventive Maintenance </span></a></li>
                             </ul>
                         </li>
                         <li class="sidebar-item"> <a class="sidebar-link has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="mdi mdi-move-resize-variant"></i><span class="hide-menu">Others </span></a>
                             <ul aria-expanded="false" class="collapse  first-level">
-                                <li class="sidebar-item"><a href="/pages-gallery" class="sidebar-link"><i class="mdi mdi-multiplication-box"></i><span class="hide-menu"> Gallery </span></a></li>
-                                <li class="sidebar-item"><a href="/pages-calendar" class="sidebar-link"><i class="mdi mdi-calendar-check"></i><span class="hide-menu"> Calendar </span></a></li>
                                 <li class="sidebar-item"><a href="/reports" class="sidebar-link"><i class="mdi mdi-bulletin-board"></i><span class="hide-menu"> Reports </span></a></li>
                                 <li class="sidebar-item"><a href="/chat" class="sidebar-link"><i class="mdi mdi-message-outline"></i><span class="hide-menu"> Chat </span></a></li>
                             </ul>
@@ -218,7 +179,7 @@
             <div class="page-breadcrumb">
                 <div class="row">
                     <div class="col-12 d-flex no-block align-items-center">
-                        <h4 class="page-title">Equipments-All</h4>
+                        <h4 class="page-title">Equipments</h4>
                         <div class="ml-auto text-right">
                             <nav aria-label="breadcrumb">
                                 <button type="button" class="btn btn-white btn-sm"><a href="/inventory/new-equipment" style="color:blue"> Add New</a></button>
@@ -240,16 +201,16 @@
                 <div class="row">
                     {{#each equipments}}
                     <!-- Column -->
-                    <div class="col-md-9 col-lg-4">
+                    <div class="col-md-9 col-lg-6">
                         <a href="/inventory/equipment/{{inv_id}}">
-                            <div class="card card-hover">
-                                <div class="box bg-white text-center">
-                                    <span class="text-muted float-left"><strong>ID:</strong> {{inv_id}}</span>
-                                    <span class="text-muted float-right">{{department}}</span>
-                                    <h5 class="text-success">{{name}}</h5>
-                                    <h6>{{location}}</h6>
-                                    <a class="btn-rectangle btn-sm btn-info float-left text-white" href="/inventory/edit-equipment/{{inv_id}}"><i class="fas fa-edit"></i></a>
-                                    <a class="btn-rectangle btn-sm btn-danger float-right text-white" href="/inventory/remove-equipment/{{inv_id}}"><i class="far fa-trash-alt"></i></a>
+                            <div class="card" style="background-color:rgb(54, 56, 56);">
+                                <div class="box">
+                                    <span class="text-muted float-left"><strong>Name:</strong> {{name}}</span>
+                                    <span class="text-muted float-right"><strong>ID:</strong> {{inv_id}}</span> <br>
+                                    <span class="text-muted float-left"><strong>Location:</strong> {{location}}</span> <br>
+                                    <button class="btn btn-secondary" style="height:28px; font-size:12px; margin-top:10px;"><a href="/inventory/edit-equipment/{{inv_id}}" style="color:white;">Edit</a></button>
+                                    <button class="btn btn-danger" style="height:28px; font-size:12px; margin-top:10px;"><a href="/inventory/remove-equipment/{{inv_id}}" style="color:white;">Delete</a> </button>
+                                    
                                 </div>
                             </div>
                         </a>

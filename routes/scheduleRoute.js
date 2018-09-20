@@ -38,22 +38,33 @@ let adminSessionChecker = (req, res, next) =>{
 };
 
 
-router.get('/preventive-maintenance', adminSessionChecker, scheduleController.preventiveMaint);
-router.get('/preventive-maintenance/:maint_id', adminSessionChecker, scheduleController.aPrevMaint);
-router.get('/schedule/:schedule_id', adminSessionChecker, scheduleController.aSchedule);
-router.get('/schedule', adminSessionChecker, scheduleController.schedule);
-router.get('/new-schedule', adminSessionChecker, scheduleController.addSchedule);
-router.get('/new-preventive', adminSessionChecker, scheduleController.addPrevMaint);
-router.get('/edit-schedule/:schedule_id', adminSessionChecker, scheduleController.editSchedule);
-router.get('/edit-preventive/:maint_id', adminSessionChecker, scheduleController.editPrevMaint);
-router.get('/delete-schedule/:schedule_id', adminSessionChecker, scheduleController.deleteSchedule);
-router.get('/delete-schedule-admin/:schedule_id', adminSessionChecker, scheduleController.deleteScheduleAdmin);
+router.get('/preventive-maintenance', adminSessionChecker, scheduleController.preventive);
+router.get('/corrective-maintenance', adminSessionChecker, scheduleController.corrective);
+router.get('/procedures', adminSessionChecker, scheduleController.procedure);
 
-router.get('/procedures', scheduleController.procedures);
+// router.get('/preventive/:schedule_id', adminSessionChecker, scheduleController.aPreventive);
+// router.get('/corrective/:schedule_id', adminSessionChecker, scheduleController.aCorrective);
 
-router.post('/add-schedule', scheduleController.saveSchedule);
-router.post('/add-preventive', scheduleController.savePrevMaint);
-router.post('/update-preventive', scheduleController.updatePrevMaint);
-router.post('/update-schedule', scheduleController.updateSchedule);
+router.get('/procedure/:maint_id', adminSessionChecker, scheduleController.aProcedure);
+
+router.get('/new-corrective', adminSessionChecker, scheduleController.addCorrective);
+router.get('/new-preventive', adminSessionChecker, scheduleController.addPreventive);
+router.get('/new-procedure', adminSessionChecker, scheduleController.addProcedure);
+
+router.get('/edit-preventive/:schedule_id', adminSessionChecker, scheduleController.editPreventive);
+router.get('/edit-corrective/:schedule_id', adminSessionChecker, scheduleController.editCorrective);
+router.get('/edit-procedure/:maint_id', adminSessionChecker, scheduleController.editProcedure);
+
+router.get('/delete-corrective/:schedule_id', adminSessionChecker, scheduleController.deleteCorrective);
+router.get('/delete-preventive/:schedule_id', adminSessionChecker, scheduleController.deletePreventive);
+router.get('/delete-corrective-admin/:schedule_id', adminSessionChecker, scheduleController.deleteCorrectiveAdmin);
+
+router.post('/add-procedure', scheduleController.saveProcedure);
+router.post('/add-corrective', scheduleController.saveCorrective);
+router.post('/add-preventive', scheduleController.savePreventive);
+
+router.post('/update-corrective', scheduleController.updateCorrective);
+router.post('/update-preventive', scheduleController.updatePreventive);
+router.post('/update-procedure', scheduleController.updateProcedure);
     
 module.exports = router;

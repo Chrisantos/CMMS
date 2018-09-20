@@ -36,30 +36,13 @@
                     <!-- ============================================================== -->
                     <!-- Logo -->
                     <!-- ============================================================== -->
-                    <a class="navbar-brand" href="index.html">
-                        <!-- Logo icon -->
+                    <a class="navbar-brand" href="/">
                         <b class="logo-icon p-l-10">
-                            <!--You can put here icon as well // <i class="wi wi-sunset"></i> //-->
-                            <!-- Dark Logo icon -->
                             <img src="/img/favicon.png" alt="homepage" class="light-logo" />
-                           
                         </b>
-                        <!--End Logo icon -->
-                         <!-- Logo text -->
                         <span class="logo-text" style="margin-top:8px;">
-                             <!-- dark Logo text -->
-                             {{!-- <img src="/assets/images/logo-text.png" alt="homepage" class="light-logo" /> --}}
                              <h3>CMMS - Admin</h3>
-                            
                         </span>
-                        <!-- Logo icon -->
-                        <!-- <b class="logo-icon"> -->
-                            <!--You can put here icon as well // <i class="wi wi-sunset"></i> //-->
-                            <!-- Dark Logo icon -->
-                            <!-- <img src="../../assets/images/logo-text.png" alt="homepage" class="light-logo" /> -->
-                            
-                        <!-- </b> -->
-                        <!--End Logo icon -->
                     </a>
                     <!-- ============================================================== -->
                     <!-- End Logo -->
@@ -88,7 +71,7 @@
                             </a>
                             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                                 <a class="dropdown-item" href="/hr/new-engineer">Engineer</a>
-                                <a class="dropdown-item" href="/hr/new-operator ">Operator</a>
+                                <a class="dropdown-item" href="/hr/new-operator ">User</a>
                             </div>
                         </li>
                         <!-- ============================================================== -->
@@ -136,34 +119,13 @@
                                 </ul>
                             </div>
                         </li>
-                        <!-- ============================================================== -->
-                        <!-- End Messages -->
-                        <!-- ============================================================== -->
-
-                        <!-- ============================================================== -->
-                        <!-- User profile and search -->
-                        <!-- ============================================================== -->
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle text-muted waves-effect waves-dark pro-pic" href="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img src="../../assets/images/users/1.jpg" alt="user" class="rounded-circle" width="31"></a>
-                            <div class="dropdown-menu dropdown-menu-right user-dd animated">
-                                <a class="dropdown-item" href="/admin/profile"><i class="ti-user m-r-5 m-l-5"></i> My Profile</a>
-                                <div class="dropdown-divider"></div>
-                                <a class="dropdown-item" href="/admin-logout"><i class="fa fa-power-off m-r-5 m-l-5"></i> Logout</a>
-                            </div>
-                        </li>
-                        <!-- ============================================================== -->
-                        <!-- User profile and search -->
-                        <!-- ============================================================== -->
+                        <a class="navbar-brand" href="/admin-logout" style="margin-top:13px">
+                            <i class="fas fa-sign-out-alt"></i>
+                        </a>
                     </ul>
                 </div>
             </nav>
         </header>
-        <!-- ============================================================== -->
-        <!-- End Topbar header -->
-        <!-- ============================================================== -->
-        <!-- ============================================================== -->
-        <!-- Left Sidebar - style you can find in sidebar.scss  -->
-        <!-- ============================================================== -->
         <aside class="left-sidebar" data-sidebarbg="skin5">
             <!-- Sidebar scroll-->
             <div class="scroll-sidebar">
@@ -185,16 +147,15 @@
                                 <li class="sidebar-item"><a href="/hr/operators" class="sidebar-link"><i class="mdi mdi-emoticon-cool"></i><span class="hide-menu"> Operator </span></a></li>
                             </ul>
                         </li>
-                        <li class="sidebar-item"> <a class="sidebar-link has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="mdi mdi-face"></i><span class="hide-menu">Maintenance </span></a>
+                        <li class="sidebar-item"> <a class="sidebar-link has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="mdi mdi-settings"></i><span class="hide-menu">Maintenance </span></a>
                             <ul aria-expanded="false" class="collapse  first-level">
-                                <li class="sidebar-item"><a href="/maintenance/preventive-maintenance" class="sidebar-link"><i class="mdi mdi-emoticon"></i><span class="hide-menu"> Preventive Maintenance </span></a></li>
-                                <li class="sidebar-item"><a href="/maintenance/schedule" class="sidebar-link"><i class="mdi mdi-emoticon-cool"></i><span class="hide-menu"> Schedules </span></a></li>
+                                <li class="sidebar-item"><a href="/maintenance/procedures" class="sidebar-link"><i class="mdi mdi-settings"></i><span class="hide-menu"> Procedures </span></a></li>
+                                <li class="sidebar-item"><a href="/maintenance/corrective-maintenance" class="sidebar-link"><i class="mdi mdi-settings"></i><span class="hide-menu"> Corrective Maintenance </span></a></li>
+                                <li class="sidebar-item"><a href="/maintenance/preventive-maintenance" class="sidebar-link"><i class="mdi mdi-settings"></i><span class="hide-menu"> Preventive Maintenance </span></a></li>
                             </ul>
                         </li>
                         <li class="sidebar-item"> <a class="sidebar-link has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="mdi mdi-move-resize-variant"></i><span class="hide-menu">Others </span></a>
                             <ul aria-expanded="false" class="collapse  first-level">
-                                <li class="sidebar-item"><a href="/pages-gallery" class="sidebar-link"><i class="mdi mdi-multiplication-box"></i><span class="hide-menu"> Gallery </span></a></li>
-                                <li class="sidebar-item"><a href="/pages-calendar" class="sidebar-link"><i class="mdi mdi-calendar-check"></i><span class="hide-menu"> Calendar </span></a></li>
                                 <li class="sidebar-item"><a href="/reports" class="sidebar-link"><i class="mdi mdi-bulletin-board"></i><span class="hide-menu"> Reports </span></a></li>
                                 <li class="sidebar-item"><a href="/chat" class="sidebar-link"><i class="mdi mdi-message-outline"></i><span class="hide-menu"> Chat </span></a></li>
                             </ul>
@@ -248,7 +209,7 @@
                             <p style="color:red">{{error}}</p>
                             <br>
                             <div class="card-body">
-                                <form action="/inventory/update-accessory" method="post">
+                                <form action="/inventory/update-accessory" method="post"  name='accessory_form'>
                                     <div class="row mb-3">
                                         <div class="col-lg-12">
                                             <label>Equipment </label>
@@ -262,38 +223,38 @@
                                     <div class="row mb-3">
                                         <div class="col-lg-6">
                                             <label>Equipment Location</label>
-                                            <input type="text" class="form-control" placeholder="Enter Equipment Location" name="equipt_loc" id="equipt_loc" value="{{accessory.equipt_loc}}">
+                                            <input type="text" class="form-control" required ="required" placeholder="Enter Equipment Location" name="equipt_loc" id="equipt_loc" value="{{accessory.equipt_loc}}">
                                         </div>
                                         <div class="col-lg-6">
                                             <label>Accessory Name </label>
-                                            <input type="text" class="form-control" placeholder="Enter Accessory Name" name="accessory_name" id="accessory_name" value="{{accessory.accessory_name}}">
+                                            <input type="text" class="form-control" required ="required" placeholder="Enter Accessory Name" name="accessory_name" id="accessory_name" value="{{accessory.accessory_name}}">
                                         </div>
                                     </div>
                                     <div class="row mb-3">
                                         <div class="col-lg-12">
                                             <label>Accessory Location</label>
-                                            <input type="text" class="form-control" placeholder="Enter Accessory Location" name="accessory_loc" id="accessory_loc" value="{{accessory.accessory_loc}}">
+                                            <input type="text" class="form-control" required ="required" placeholder="Enter Accessory Location" name="accessory_loc" id="accessory_loc" value="{{accessory.accessory_loc}}">
                                         </div>
                                     </div>
                                     <div class="row mb-3">
                                         <div class="col-lg-12">
                                             <label>Accessory Quantity</label>
-                                            <input type="number" class="form-control" placeholder="Enter Quantity" name="quantity" id="quantity" value="{{accessory.quantity}}">
+                                            <input type="number" class="form-control" required ="required" placeholder="Enter Quantity" name="quantity" id="quantity" value="{{accessory.quantity}}">
                                         </div>
                                     </div>
                                     <div class="row mb-3">
                                         <div class="col-lg-6">
                                             <label>Manufactured</label>
-                                            <input type="date" class="form-control" placeholder="Enter Manufactured Date" name="manuf_date" id="manuf_date" value="{{accessory.manuf_date}}">
+                                            <input type="date" class="form-control" required ="required" placeholder="Enter Manufactured Date" name="manuf_date" id="manuf_date" value="{{accessory.manuf_date}}">
                                         </div>
                                         <div class="col-lg-6">
                                             <label>Expiry Date </label>
-                                            <input type="date" class="form-control" placeholder="Enter Expiry Date" name="expiry_date" id="expiry_date" value="{{accessory.expiry_date}}">
+                                            <input type="date" class="form-control" required ="required" placeholder="Enter Expiry Date" name="expiry_date" id="expiry_date" value="{{accessory.expiry_date}}">
                                         </div>
                                     </div>
                                     <div class="form-group">
                                         <label>Description</label>
-                                        <textarea class="form-control" name="description" id="description">{{accessory.description}}</textarea>                                    
+                                        <textarea class="form-control" name="description" required ="required" id="description">{{accessory.description}}</textarea>                                    
                                     </div>
                                     <input type="hidden" name="sn" value="{{accessory.sn}}">
                                     <input type="submit" value="Add" class="btn btn-info">
@@ -376,6 +337,59 @@
         });
 
     </script>
+
+    {{!-- <script type="text/javascript">
+        $(document).ready(function(){
+            let equipt_loc            = $('#equipt_loc').val();
+            let accessory_name           = $('#accessory_name').val();
+            let accessory_loc      = $('#accessory_loc').val();
+            let quantity    = $('#quantity').val();
+            let manuf_date      = $('#manuf_date').val();
+            let description   = $('#description').val();
+            let wps             = /^\s*$/;
+            //Learn how to check if a button has been clicked
+            if(wps.test(equipt_loc) || wps.test(accessory_name) || wps.test(accessory_loc) || wps.test(quantity) 
+                || wps.test(manuf_date) || wps.test(description)){
+                $('#validation').text("All Fields must be filled");
+                return false;
+            }
+            
+        });
+    </script> --}}
+
+    <script src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/jquery.validate.min.js"></script>
+<script>
+$("form[name='accessory_form']").validate({
+            // Specify validation rules
+            rules: {
+            // The key name on the left side is the name attribute
+            // of an input field. Validation rules are defined
+            // on the right side
+                equipt_loc: "required",
+                accessory_name: "required",
+                accessory_loc: "required",
+                quantity: "required",
+                manuf_date: "required",
+                description: "required"
+    
+            },
+            // Specify validation error messages
+            messages: {
+                equipt_loc: "required",
+                accessory_name: "required",
+                accessory_loc: "required",
+                quantity: "required",
+                manuf_date: "required",
+                description: "required"
+            },
+            // Make sure the form is submitted to the destination defined
+            // in the "action" attribute of the form when valid
+            submitHandler: function(form) {
+            form.submit();
+            }
+        });
+    </script>
+    
     
 </body>
 

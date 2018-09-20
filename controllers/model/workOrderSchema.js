@@ -10,6 +10,7 @@ let schema = new Schema({
     accessories:        String,
     fault:              String,
     engineer_username:  String,
+    date_sent:          String
 });
 
 schema.pre('save', (next) =>{

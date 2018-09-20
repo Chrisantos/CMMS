@@ -7,7 +7,8 @@ let schema = new Schema({
     location:           String,
     due_date:           String,
     due_day:            Number,
-    due_month:          Number
+    due_month:          Number,
+    type:               String
 });
 
 schema.pre('save', (next) =>{

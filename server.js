@@ -9,8 +9,7 @@ const logbookRoute    = require('./routes/logbookRoute');
 const scheduleRoute   = require('./routes/scheduleRoute');
 
 const app = express();
-const mongoUri = "mongodb://127.0.0.1/cmms";
-mongoose.connect(mongoUri);
+mongoose.connect(process.env.mongoUri);
 
 app.use(express.static(__dirname + "/public"));
 
