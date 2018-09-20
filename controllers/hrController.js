@@ -4,7 +4,7 @@ const operatorModel    = require('./model/operatorSchema');
 const notifModel        = require('./model/notificationSchema');
 const scheduleModel     = require('./model/correctiveSchema');
 const departmentModel   = require('./model/departmentSchema');
-const bcrypt            = require('bcrypt');
+// const bcrypt            = require('bcrypt');
 
 module.exports = {
     newEng: (req, res) =>{
@@ -44,21 +44,35 @@ module.exports = {
         let phone       = req.body.phone;
         let username    = req.body.username;
 
-        bcrypt.hash(password, 10, function(err, hash) {
-            let newEngineer = new engineerModel({
-                name,
-                password: hash,
-                specialty,
-                username,
-                phone
-            });
+        // bcrypt.hash(password, 10, function(err, hash) {
+        //     let newEngineer = new engineerModel({
+        //         name,
+        //         password: hash,
+        //         specialty,
+        //         username,
+        //         phone
+        //     });
     
-            newEngineer.save((err) =>{
-                if(err)
-                    res.render('hr/newEngineer', {error: "Error"});
-                else
-                    res.redirect('/hr/engineers');
-            });
+        //     newEngineer.save((err) =>{
+        //         if(err)
+        //             res.render('hr/newEngineer', {error: "Error"});
+        //         else
+        //             res.redirect('/hr/engineers');
+        //     });
+        // });
+        let newEngineer = new engineerModel({
+            name,
+            password,
+            specialty,
+            username,
+            phone
+        });
+
+        newEngineer.save((err) =>{
+            if(err)
+                res.render('hr/newEngineer', {error: "Error"});
+            else
+                res.redirect('/hr/engineers');
         });
 
         
@@ -70,21 +84,35 @@ module.exports = {
         let phone       = req.body.phone;
         let username    = req.body.username;
 
-        bcrypt.hash(password, 10, function(err, hash) {
-            let newOperator = new operatorModel({
-                name,
-                password: hash,
-                department,
-                username,
-                phone
-            });
+        // bcrypt.hash(password, 10, function(err, hash) {
+        //     let newOperator = new operatorModel({
+        //         name,
+        //         password: hash,
+        //         department,
+        //         username,
+        //         phone
+        //     });
     
-            newOperator.save((err) =>{
-                if(err)
-                    res.render('hr/newOperator', {error: err});
-                else
-                    res.redirect('/hr/operators');
-            });
+        //     newOperator.save((err) =>{
+        //         if(err)
+        //             res.render('hr/newOperator', {error: err});
+        //         else
+        //             res.redirect('/hr/operators');
+        //     });
+        // });
+        let newOperator = new operatorModel({
+            name,
+            password,
+            department,
+            username,
+            phone
+        });
+
+        newOperator.save((err) =>{
+            if(err)
+                res.render('hr/newOperator', {error: err});
+            else
+                res.redirect('/hr/operators');
         });
 
         
@@ -97,11 +125,25 @@ module.exports = {
         let username    = req.body.username;    //as fetched from a hidden input box
         let phone       = req.body.phone;
         
-        bcrypt.hash(password, 10, function(err, hash) {
-            engineerModel.findOneAndUpdate({username: username},
+        // bcrypt.hash(password, 10, function(err, hash) {
+        //     engineerModel.findOneAndUpdate({username: username},
+        //     {
+        //         name,
+        //         password: hash,
+        //         specialty,
+        //         username,
+        //         phone
+        //     }, (err, engineer) =>{
+        //         if(err)
+        //             res.render('hr/editEngineer', {error: err});
+        //         else
+        //             res.redirect('/hr/engineers')
+        //     });
+        // });
+        engineerModel.findOneAndUpdate({username: username},
             {
                 name,
-                password: hash,
+                password,
                 specialty,
                 username,
                 phone
@@ -111,7 +153,6 @@ module.exports = {
                 else
                     res.redirect('/hr/engineers')
             });
-        });
     },
     updateOp: (req, res) =>{
         let name        = req.body.name;
@@ -120,11 +161,25 @@ module.exports = {
         let username    = req.body.username;        //as fetched from a hidden input box
         let phone       = req.body.phone;
 
-        bcrypt.hash(password, 10, function(err, hash) {
-            operatoreModel.findOneAndUpdate({username: username},
+        // bcrypt.hash(password, 10, function(err, hash) {
+        //     operatoreModel.findOneAndUpdate({username: username},
+        //     {
+        //         name,
+        //         password: hash,
+        //         department,
+        //         username,
+        //         phone
+        //     }, (err, operator) =>{
+        //         if(err)
+        //             res.render('hr/editOperator', {error: err});
+        //         else
+        //             res.redirect('/hr/operators');
+        //     });
+        // });
+        operatoreModel.findOneAndUpdate({username: username},
             {
                 name,
-                password: hash,
+                password,
                 department,
                 username,
                 phone
@@ -134,7 +189,6 @@ module.exports = {
                 else
                     res.redirect('/hr/operators');
             });
-        });
     },
 
     engSignin: (req, res) =>{
@@ -154,14 +208,16 @@ module.exports = {
             else if(!engineer)
                 res.render('hr/engLogin', {error: `Username is incorrect`});
             else{
-                bcrypt.compare(password, engineer.password, function(err, resp) {
-                    if(err)
-                        res.render('hr/engLogin', {error: `Password is incorrect`});
-                    else{
-                        req.engineersession.user = engineer;
-                        res.redirect('/engineer/:'+username); 
-                    }
-                });                    
+                // bcrypt.compare(password, engineer.password, function(err, resp) {
+                //     if(err)
+                //         res.render('hr/engLogin', {error: `Password is incorrect`});
+                //     else{
+                //         req.engineersession.user = engineer;
+                //         res.redirect('/engineer/:'+username); 
+                //     }
+                // });
+                req.engineersession.user = engineer;
+                res.redirect('/engineer/:'+username);                    
                 
             }
         });
@@ -176,14 +232,16 @@ module.exports = {
             else if(!operator)
                 res.render('hr/opLogin', {error: `Username is incorrect`});
             else{
-                bcrypt.compare(password, operator.password, function(err, resp) {
-                    if(err)
-                    res.render('hr/opLogin', {error: `Password is incorrect`});
-                    else{
-                        req.operatorsession.user = operator;
-                        res.redirect('/operator/:'+username); 
-                    }
-                });
+                // bcrypt.compare(password, operator.password, function(err, resp) {
+                //     if(err)
+                //     res.render('hr/opLogin', {error: `Password is incorrect`});
+                //     else{
+                //         req.operatorsession.user = operator;
+                //         res.redirect('/operator/:'+username); 
+                //     }
+                // });
+                req.operatorsession.user = operator;
+                res.redirect('/operator/:'+username);
             }
         });
     },
@@ -284,14 +342,16 @@ module.exports = {
             else if(!admin)
                 res.render('admin/adminLogin', {error: `Username is incorrect`});
             else{
-                bcrypt.compare(password, admin.password, function(err, resp) {
-                    if(err)
-                    res.render('admin/adminLogin', {error: `Password is incorrect`});
-                    else{
-                        req.adminsession.user = admin;
-                        res.redirect('/admin'); 
-                    }
-                });
+                // bcrypt.compare(password, admin.password, function(err, resp) {
+                //     if(err)
+                //     res.render('admin/adminLogin', {error: `Password is incorrect`});
+                //     else{
+                //         req.adminsession.user = admin;
+                //         res.redirect('/admin'); 
+                //     }
+                // });
+                req.adminsession.user = admin;
+                res.redirect('/admin');
 
             }
         });
@@ -306,18 +366,29 @@ module.exports = {
 
         console.log("Made request");
 
-        bcrypt.hash(password, 10, function(err, hash) {
-            let newAdmin = new adminModel({
-                password: hash,
-                username
-            });
+        // bcrypt.hash(password, 10, function(err, hash) {
+        //     let newAdmin = new adminModel({
+        //         password: hash,
+        //         username
+        //     });
     
-            newAdmin.save((err) =>{
-                if(err)
-                    res.render('admin/adminLogin', {error: "Error"});
-                else
-                    res.redirect('/admin');
-            });
+        //     newAdmin.save((err) =>{
+        //         if(err)
+        //             res.render('admin/adminLogin', {error: "Error"});
+        //         else
+        //             res.redirect('/admin');
+        //     });
+        // });
+        let newAdmin = new adminModel({
+            password: hash,
+            username
+        });
+
+        newAdmin.save((err) =>{
+            if(err)
+                res.render('admin/adminLogin', {error: "Error"});
+            else
+                res.redirect('/admin');
         });  
     },
 
