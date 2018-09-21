@@ -105,20 +105,35 @@ module.exports = (app) =>{
     //Chat routes
     app.get('/engineer/:engineer_id', engineerSessionChecker, chatController.chatEngineer);
     app.get('/operator/:operator_id', operatorSessionChecker, chatController.chatOperator);
-    app.get('/chat', adminSessionChecker, chatController.chat);
-    app.get('/work-order', adminSessionChecker, chatController.workOrder);
+    // app.get('/chat', adminSessionChecker, chatController.chat);
+    // app.get('/work-order', adminSessionChecker, chatController.workOrder);
 
 
-    app.get('/admin-logout', adminSessionChecker, hrController.adminLogout);
+    // app.get('/admin-logout', adminSessionChecker, hrController.adminLogout);
     
 
-    app.get('/reports', adminSessionChecker, logbookController.getReport);
-    app.get('/reports/:month', adminSessionChecker, logbookController.getReport);
+    // app.get('/reports', adminSessionChecker, logbookController.getReport);
+    // app.get('/reports/:month', adminSessionChecker, logbookController.getReport);
     
-    app.get('/departments', adminSessionChecker, otherController.department);
-    app.get('/new-department', adminSessionChecker, otherController.newDepartment);
-    app.get('/duty-roaster', adminSessionChecker, otherController.dutyRoaster);
-    app.get('/new-duty-roaster', adminSessionChecker, otherController.newDutyRoaster);
+    // app.get('/departments', adminSessionChecker, otherController.department);
+    // app.get('/new-department', adminSessionChecker, otherController.newDepartment);
+    // app.get('/duty-roaster', adminSessionChecker, otherController.dutyRoaster);
+    // app.get('/new-duty-roaster', adminSessionChecker, otherController.newDutyRoaster);
+
+    app.get('/chat', chatController.chat);
+    app.get('/work-order', chatController.workOrder);
+
+
+    app.get('/admin-logout', hrController.adminLogout);
+    
+
+    app.get('/reports', logbookController.getReport);
+    app.get('/reports/:month', logbookController.getReport);
+    
+    app.get('/departments', otherController.department);
+    app.get('/new-department', otherController.newDepartment);
+    app.get('/duty-roaster', otherController.dutyRoaster);
+    app.get('/new-duty-roaster', otherController.newDutyRoaster);
     
     app.get('/engineer-signin', hrController.engSignin);
     app.get('/operator-signin', hrController.opSignin);

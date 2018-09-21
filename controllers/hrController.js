@@ -388,7 +388,7 @@ module.exports = {
             if(err)
                 res.render('admin/adminSignup', {error: "Error"});
             else{
-                req.adminsession.user = admin;
+                req.adminsession.user = newAdmin;
                 res.redirect('/admin');
             }
                 
