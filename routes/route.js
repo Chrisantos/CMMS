@@ -123,6 +123,7 @@ module.exports = (app) =>{
     app.get('/engineer-signin', hrController.engSignin);
     app.get('/operator-signin', hrController.opSignin);
     app.get('/admin-signin', hrController.adminSignin);
+    app.get('/admin-signup', hrController.adminSignup);
 
     app.get('/corrective-maintenance', scheduleController.engCorrective);
     app.get('/preventive-maintenance', scheduleController.engPreventive);
@@ -130,6 +131,7 @@ module.exports = (app) =>{
     app.post('/engineer-login', hrController.engLogin);
     app.post('/operator-login', hrController.opLogin);
     app.post('/admin-login', hrController.adminLogin);
+    app.post('/admin-signup', hrController.addAdmin);
 
     app.get('/work-order', otherController.workOrder);
     app.get('/edit-workorder/:id', otherController.editWorkOrder);

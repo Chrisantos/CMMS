@@ -332,6 +332,10 @@ module.exports = {
         res.render('admin/adminLogin');
     },
 
+    adminSignup: (req, res) =>{
+        res.render('admin/adminSignup');
+    },
+
     adminLogin: (req, res) =>{
         let username = req.body.username;
         let password = req.body.password;
@@ -359,12 +363,8 @@ module.exports = {
 
     //Post requests
     addAdmin: (req, res) =>{
-        // let password    = req.body.password;
-        // let username      = req.body.username;
-        let password = "admin";
-        let username = "admin";
-
-        console.log("Made request");
+        let password    = req.body.password;
+        let username      = req.body.username;
 
         // bcrypt.hash(password, 10, function(err, hash) {
         //     let newAdmin = new adminModel({
@@ -380,13 +380,13 @@ module.exports = {
         //     });
         // });
         let newAdmin = new adminModel({
-            password: hash,
+            password,
             username
         });
 
         newAdmin.save((err) =>{
             if(err)
-                res.render('admin/adminLogin', {error: "Error"});
+                res.render('admin/adminSignup', {error: "Error"});
             else
                 res.redirect('/admin');
         });  
