@@ -123,7 +123,6 @@ module.exports = (app) =>{
     app.get('/chat', chatController.chat);
     app.get('/work-order', chatController.workOrder);
 
-
     app.get('/admin-logout', hrController.adminLogout);
     
 
