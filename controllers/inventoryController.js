@@ -91,17 +91,6 @@ module.exports = {
         let date            = new Date();
         let inv_id          = date.getSeconds() + date.getDay(); // Should print it on a hidden input box
 
-
-        // let wps = /^\s*$/;      //This should be done at the client-side
-        // if(wps.test(name)||wps.test(type)||wps.test(model)||wps.test(serial_num)||wps.test(country_origin)||
-        // wps.test(manuf_date)||wps.test(order_num)||wps.test(manufacturer)||wps.test(warr_exp_date)||
-        // wps.test(cost)||wps.test(received_date)||wps.test(supplier_name)||wps.test(supplier_phnum)||
-        // wps.test(install_date)||wps.test(power_req)||wps.test(current_state)||wps.test(spare_avail)||
-        // wps.test(manual_avail)||wps.test(operator_type)||wps.test(operator_name)||wps.test(operator_phnum)||
-        // wps.test(department)||wps.test(current_loc)||wps.test(notes)){
-        //     alert('All fields must be filled');
-        //     return false;
-        // }
         let newEquipment = new equiptModel({
             name,
             inv_id: `equipt${inv_id}`, 
@@ -131,7 +120,6 @@ module.exports = {
             if(err)
                 res.render('inventory/newEquipt', {error: err});
             else
-                // res.render('inventory/newEquipt', {success: `${name} added successfully`});
                 res.redirect('/inventory/equipment');
         });
 
@@ -162,7 +150,6 @@ module.exports = {
             if(err)
                 res.render('inventory/newSpare', {error: err});
             else
-                // res.render('inventory/newSpare', {success: `${spare_name} added successfully`});
                 res.redirect('/inventory/spare');
         });
     },
@@ -195,7 +182,6 @@ module.exports = {
             if(err)
                 res.render('inventory/newAccessory', {error: err});
             else
-                // res.render('inventory/newAccessory', {success: `${accessory_name} added successfully`});
                 res.redirect('/inventory/accessory');
         });
     },

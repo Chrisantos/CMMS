@@ -100,7 +100,7 @@ module.exports = (app) =>{
     app.get('/', (req, res) =>{
         res.render('admin/home');
     });
-    app.get('/admin', hrController.admin);
+    app.get('/admin', adminSessionChecker, hrController.admin);
 
     //Chat routes
     app.get('/engineer/:engineer_id', engineerSessionChecker, chatController.chatEngineer);
