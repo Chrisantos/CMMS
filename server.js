@@ -9,7 +9,7 @@ const logbookRoute    = require('./routes/logbookRoute');
 const scheduleRoute   = require('./routes/scheduleRoute');
 
 const app = express();
-mongoose.connect(process.env.mongoUri);
+mongoose.connect(process.env.MONGOLAB_URI);
 
 app.use(express.static(__dirname + "/public"));
 
